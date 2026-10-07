@@ -1,0 +1,851 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#f5f5f7">
+<title>C&amp;B Events · 7–9 Oct</title>
+<style>
+:root{
+  color-scheme:light;
+  --bg:#f5f5f7; --card:#ffffff; --ink:#1d1d1f; --ink2:#6e6e73; --line:#d2d2d7; --hair:#e8e8ed;
+  --blue:#0071e3; --blue-tint:#e8f1fc;
+  --f1:#0071e3; --fg:#a05a00;
+  --tc:#8a4b0f; --tc-bg:#fbefe2;
+  --lunch:#1f7a3a; --lunch-bg:#e5f5e9;
+  --canape:#a1306f; --canape-bg:#fbe8f2;
+  --drinks:#6b3fb5; --drinks-bg:#efe8fa;
+  --dinner:#c0392b; --dinner-bg:#fdecea;
+  --bar:#0b7285; --bar-bg:#e3f4f6;
+  --plain:#6e6e73; --plain-bg:#f0f0f3;
+  --alert:#b3261e; --alert-bg:#fff4f2; --alert-line:#f5c6c0;
+  --check:#8a5a00; --check-bg:#fff8e6; --check-line:#f1d9a0;
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue","Segoe UI",Roboto,Arial,sans-serif;
+  --radius:18px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16px;line-height:1.47;-webkit-font-smoothing:antialiased;overflow-wrap:break-word}
+.wrap{max-width:980px;margin:0 auto;padding-inline:max(16px,env(safe-area-inset-left,0px));padding-block:0 48px}
+h1,h2,h3{margin:0;letter-spacing:-.015em;text-wrap:balance}
+ul{margin:4px 0 0;padding-left:20px}
+li{margin:2px 0}
+b,strong{font-weight:600}
+
+/* Header */
+.hero{padding-top:calc(28px + env(safe-area-inset-top,0px));padding-bottom:18px}
+.eyebrow{font-size:14px;font-weight:600;color:var(--ink2)}
+.hero h1{font-size:clamp(30px,7vw,44px);font-weight:700;line-height:1.08;margin-top:6px}
+.hero p{margin:8px 0 0;color:var(--ink2);font-size:17px}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:16px;font-size:14px;color:var(--ink2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:9px;height:9px;border-radius:50%;flex:none;display:inline-block}
+.dot.f1{background:var(--f1)} .dot.fg{background:var(--fg)}
+
+/* Segmented control */
+.tabs-bar{position:sticky;top:0;z-index:10;background:rgba(245,245,247,.86);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);padding-top:calc(10px + env(safe-area-inset-top,0px));padding-bottom:10px;margin-inline:calc(-1 * max(16px,env(safe-area-inset-left,0px)));padding-inline:max(16px,env(safe-area-inset-left,0px));border-bottom:1px solid var(--hair)}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:#e3e3e8;border-radius:12px;padding:3px;max-width:520px}
+.tabs button{font:inherit;font-size:15px;font-weight:500;color:var(--ink);background:transparent;border:0;border-radius:9px;padding:8px 4px;cursor:pointer;line-height:1.2;-webkit-tap-highlight-color:transparent}
+.tabs button small{display:block;font-size:12px;color:var(--ink2);font-weight:400;margin-top:1px}
+.tabs button[aria-selected="true"]{background:var(--card);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.12),0 1px 1px rgba(0,0,0,.04)}
+.tabs button:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+
+/* Day */
+.day{padding-top:24px}
+.day-head h2{font-size:clamp(26px,6vw,34px);font-weight:700}
+.day-head p{margin:4px 0 0;color:var(--ink2);font-size:15px}
+
+.stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:16px}
+@media (min-width:640px){.stats{grid-template-columns:repeat(3,minmax(0,1fr))}.stats.four{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.stat{background:var(--card);border-radius:14px;padding:12px 14px;min-width:0}
+.stat .k{font-size:13px;color:var(--ink2);font-weight:500}
+.stat .v{font-size:24px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.2;margin-top:2px}
+.stat .s{font-size:13px;color:var(--ink2);margin-top:1px}
+
+.section-title{font-size:20px;font-weight:700;margin:28px 0 10px}
+
+/* Event cards */
+.list{display:grid;gap:10px}
+.ev{background:var(--card);border-radius:var(--radius);padding:16px;display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"time pax" "main main";gap:8px 12px;min-width:0}
+.ev.setup{background:transparent;border:1.5px dashed var(--line)}
+.ev.quiet .title{color:var(--ink)}
+.time{grid-area:time;font-variant-numeric:tabular-nums}
+.time b{font-size:20px;font-weight:700;letter-spacing:-.01em}
+.time span{font-size:15px;color:var(--ink2);margin-left:4px}
+.pax{grid-area:pax;text-align:right;font-variant-numeric:tabular-nums;line-height:1.1}
+.pax b{display:block;font-size:22px;font-weight:700}
+.pax span{font-size:12px;color:var(--ink2)}
+.main{grid-area:main;min-width:0}
+@media (min-width:720px){
+  .ev{grid-template-columns:118px minmax(0,1fr) 70px;grid-template-areas:"time main pax";padding:18px 20px}
+  .time b{display:block}
+  .time span{display:block;margin-left:0}
+}
+.tags{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.pill{display:inline-block;font-size:13px;font-weight:600;padding:3px 10px;border-radius:999px;line-height:1.35}
+.pill.tc{color:var(--tc);background:var(--tc-bg)}
+.pill.lunch{color:var(--lunch);background:var(--lunch-bg)}
+.pill.canape{color:var(--canape);background:var(--canape-bg)}
+.pill.drinks{color:var(--drinks);background:var(--drinks-bg)}
+.pill.dinner{color:var(--dinner);background:var(--dinner-bg)}
+.pill.bar{color:var(--bar);background:var(--bar-bg)}
+.pill.plain{color:var(--plain);background:var(--plain-bg)}
+.pill.setup{color:var(--blue);background:var(--blue-tint)}
+.title{font-size:18px;font-weight:600;margin-top:8px;line-height:1.3}
+.where{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;margin-top:3px;font-size:15px;color:var(--ink2)}
+.where .room{display:inline-flex;align-items:center;gap:6px;color:var(--ink);font-weight:500}
+.detail{margin-top:10px;font-size:15px;border-top:1px solid var(--hair);padding-top:10px}
+.detail:empty{display:none}
+.course{font-size:12px;font-weight:600;color:var(--ink2);text-transform:uppercase;letter-spacing:.06em;margin-top:10px}
+.course:first-child{margin-top:0}
+.dish{font-weight:500}
+.diet{margin-top:10px;background:var(--alert-bg);border:1px solid var(--alert-line);border-radius:12px;padding:10px 12px;font-size:15px}
+.diet .h{font-size:13px;font-weight:700;color:var(--alert);margin-bottom:4px}
+.diet ul{margin:0;padding-left:18px}
+.note{margin-top:8px;font-size:14px;color:var(--ink2)}
+.note b{color:var(--ink)}
+.allergy{color:var(--alert);font-weight:700}
+
+/* Checks */
+.checks{background:var(--check-bg);border:1px solid var(--check-line);border-radius:var(--radius);padding:16px 18px}
+.checks ol{margin:0;padding-left:22px;display:grid;gap:10px;font-size:15px}
+.checks li{margin:0}
+.checks li b{display:block;color:var(--ink)}
+
+footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--ink2);display:grid;gap:6px}
+
+@media print{
+  .tabs-bar{display:none}
+  .day[hidden]{display:block!important}
+  .day{break-before:page}
+  .ev{break-inside:avoid}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <div class="eyebrow">Macdonald Bath Spa Hotel · Conference &amp; Banqueting</div>
+  <h1>Events this week</h1>
+  <p>Wednesday 7 to Friday 9 October 2026</p>
+  <div class="legend">
+    <span><i class="dot f1"></i>1st floor: Avon, Kennet</span>
+    <span><i class="dot fg"></i>Ground floor: Admiralty, Antechamber, Vellore, Colonnade Bar, Terrace</span>
+  </div>
+</header>
+
+<div class="tabs-bar">
+  <div class="tabs" role="tablist" aria-label="Choose day">
+    <button role="tab" id="tab-wed" aria-controls="wed" aria-selected="true">Wed<small>7 Oct</small></button>
+    <button role="tab" id="tab-thu" aria-controls="thu" aria-selected="false">Thu<small>8 Oct</small></button>
+    <button role="tab" id="tab-fri" aria-controls="fri" aria-selected="false">Fri<small>9 Oct</small></button>
+  </div>
+</div>
+
+<!-- ===================== WEDNESDAY ===================== -->
+<section class="day" id="wed" role="tabpanel" aria-labelledby="tab-wed">
+  <div class="day-head">
+    <h2>Wednesday 7 October</h2>
+    <p>Stone King LLP (40) · WASSH (1 room)</p>
+  </div>
+  <div class="stats four">
+    <div class="stat"><div class="k">Tea &amp; coffee</div><div class="v">3 × 40</div><div class="s">Avon</div></div>
+    <div class="stat"><div class="k">Lunch</div><div class="v">40</div><div class="s">Vellore, 12:00</div></div>
+    <div class="stat"><div class="k">Canapés &amp; drinks</div><div class="v">45</div><div class="s">Terrace, 15:30</div></div>
+    <div class="stat"><div class="k">Breakfast Thursday</div><div class="v">1</div><div class="s">WASSH room</div></div>
+  </div>
+
+  <h3 class="section-title">Timeline</h3>
+  <div class="list">
+    <article class="ev quiet">
+      <div class="time"><b>09:00</b><span>to 17:00</span></div>
+      <div class="pax"><b>40</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill plain">Meeting</span></div>
+        <div class="title">Stone King LLP · All-day meeting</div>
+        <div class="where"><span class="room"><i class="dot f1"></i>Avon Room</span>1st floor</div>
+        <div class="detail">Cabaret, 5 tables, no top table. Water and sweets all day.
+          <div class="note"><b>AV:</b> flipchart, pads and pens · TV and PA with microphone</div></div>
+      </div>
+    </article>
+
+    <article class="ev">
+      <div class="time"><b>09:30</b><span>to 10:00</span></div>
+      <div class="pax"><b>40</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill tc">Tea &amp; Coffee</span></div>
+        <div class="title">Arrival and registration</div>
+        <div class="where"><span class="room"><i class="dot f1"></i>Avon Room</span>Stone King LLP</div>
+        <div class="detail"><span class="dish">Tea and coffee station with home-baked snacks</span></div>
+      </div>
+    </article>
+
+    <article class="ev">
+      <div class="time"><b>11:00</b><span>to 11:15</span></div>
+      <div class="pax"><b>40</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill tc">Tea &amp; Coffee</span></div>
+        <div class="title">Mid-morning break</div>
+        <div class="where"><span class="room"><i class="dot f1"></i>Avon Room</span>Stone King LLP</div>
+        <div class="detail"><span class="dish">Tea and coffee station with home-baked snacks</span>
+          <div class="note">15-minute break. Set by 10:55.</div></div>
+      </div>
+    </article>
+
+    <article class="ev">
+      <div class="time"><b>12:00</b><span>to 13:00</span></div>
+      <div class="pax"><b>40</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill lunch">Lunch</span></div>
+        <div class="title">Lunch</div>
+        <div class="where"><span class="room"><i class="dot fg"></i>The Vellore</span>Stone King LLP</div>
+        <div class="detail"><span class="dish">Chef's choice two-course hot and cold lunch</span>
+          <div class="diet"><div class="h">Special diets · 6</div>
+            <ul><li>R.B. and A.R.: no beef</li><li>H.P. and K.A.: dairy free</li><li>L.C.: gluten free</li><li>L.E.: vegan</li></ul></div></div>
+      </div>
+    </article>
+
+    <article class="ev">
+      <div class="time"><b>14:00</b><span>to 14:15</span></div>
+      <div class="pax"><b>40</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill tc">Tea &amp; Coffee</span></div>
+        <div class="title">Afternoon break</div>
+        <div class="where"><span class="room"><i class="dot f1"></i>Avon Room</span>Stone King LLP</div>
+        <div class="detail"><span class="dish">Tea and coffee station with home-baked snacks</span></div>
+      </div>
+    </article>
+
+    <article class="ev">
+      <div class="time"><b>15:30</b><span>to 17:00</span></div>
+      <div class="pax"><b>45</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill canape">Canapés</span><span class="pill drinks">Drinks</span></div>
+        <div class="title">Drinks reception and networking</div>
+        <div class="where"><span class="room"><i class="dot fg"></i>Alfresco Terrace</span>Stone King LLP</div>
+        <div class="detail">
+          <div class="course">Canapés · £10 per person</div>
+          <ul><li>Thai crab cakes, chilli jam</li><li>Chicken satay</li><li>Strathdon blue and leek tart (v)</li></ul>
+          <div class="course">Drinks</div>
+          <ul><li>1 bucket of lager (5 Peroni, 5 Corona)</li><li>3 bottles house white</li><li>Soft drinks in a bucket, for 10 people</li><li>1 jug of elderflower</li></ul>
+          <div class="note"><b>Set-up:</b> block off either end of the terrace for the group.</div></div>
+      </div>
+    </article>
+
+    <article class="ev quiet">
+      <div class="time"><b>Night</b></div>
+      <div class="pax"><b>1</b><span>room</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill plain">Bedroom</span></div>
+        <div class="title">WASSH · Overnight, breakfast Thursday</div>
+        <div class="where"><span class="room"><i class="dot fg"></i>The Vellore</span>for breakfast</div>
+        <div class="detail">1 classic single, bed and breakfast.</div>
+      </div>
+    </article>
+  </div>
+
+  <h3 class="section-title">To check today</h3>
+  <div class="checks"><ol>
+    <li><b>Canapés don't cover the special diets.</b> Nothing for the vegan guest, the two dairy-free guests or the gluten-free guest. Ask chef for one extra canapé.</li>
+    <li><b>Canapés for 45, not 40.</b> The reception is booked for 45.</li>
+    <li><b>Rain plan for 15:30.</b> Confirm with Benice where the reception goes if the terrace can't be used.</li>
+  </ol></div>
+</section>
+
+<!-- ===================== THURSDAY ===================== -->
+<section class="day" id="thu" role="tabpanel" aria-labelledby="tab-thu">
+  <div class="day-head">
+    <h2>Thursday 8 October</h2>
+    <p>WASSH (40) · University of Bath (18) · Siemens (78)</p>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="k">Lunch</div><div class="v">58</div><div class="s">Vellore: 18 at 12:30, 40 at 13:00</div></div>
+    <div class="stat"><div class="k">Dinner</div><div class="v">85</div><div class="s">Avon 78, Vellore 7</div></div>
+    <div class="stat"><div class="k">Canapés</div><div class="v">78</div><div class="s">Colonnade Bar, 19:15</div></div>
+    <div class="stat"><div class="k">Tea &amp; coffee</div><div class="v">5 breaks</div><div class="s">WASSH 2 × 40, Uni 3 × 18</div></div>
+    <div class="stat"><div class="k">Bar tab</div><div class="v">£2,500</div><div class="s">Kennet, 19:00 to 23:00</div></div>
+    <div class="stat"><div class="k">Breakfast Friday</div><div class="v">88</div><div class="s">Siemens 78, WASSH 10 rooms</div></div>
+  </div>
+
+  <h3 class="section-title">Timeline</h3>
+  <div class="list">
+    <article class="ev">
+      <div class="time"><b>08:30</b><span>to 09:00</span></div>
+      <div class="pax"><b>40</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill tc">Tea &amp; Coffee</span></div>
+        <div class="title">WASSH · Arrival</div>
+        <div class="where"><span class="room"><i class="dot fg"></i>Admiralty Antechamber</span>Ground floor</div>
+        <div class="detail"><span class="dish">Tea and coffee station with home-baked snacks</span>
+          <div class="note"><b>All day:</b> different milks and decaf coffee available.</div></div>
+      </div>
+    </article>
+
+    <article class="ev quiet">
+      <div class="time"><b>09:00</b><span>to 15:00</span></div>
+      <div class="pax"><b>40</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill plain">Meeting</span></div>
+        <div class="title">WASSH · All-day meeting</div>
+        <div class="where"><span class="room"><i class="dot fg"></i>Admiralty Room</span>Ground floor</div>
+        <div class="detail">Cabaret. <b>1 fruit bowl</b> in the room, mineral water and sweets.
+          <div class="note"><b>AV:</b> flipchart, pads and pens · TV and HDMI cable</div></div>
+      </div>
+    </article>
+
+    <article class="ev quiet">
+      <div class="time"><b>09:00</b><span>to 16:00</span></div>
+      <div class="pax"><b>18</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill plain">Meeting</span></div>
+        <div class="title">University of Bath · All-day meeting</div>
+        <div class="where"><span class="room"><i class="dot f1"></i>Kennet Room</span>1st floor</div>
+        <div class="detail"><b>10:00 to 12:30:</b> 18 chairs in a large circle in the middle of the room.<br>
+          <b>13:30 to 16:00:</b> 3 round tables of 6, cabaret style.
+          <div class="note"><b>AV:</b> 5 flipcharts in total, pads and pens · TV · water and sweets</div></div>
+      </div>
+    </article>
+
+    <article class="ev quiet">
+      <div class="time"><b>09:15</b></div>
+      <div class="pax"><b>78</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill plain">Coach</span></div>
+        <div class="title">Siemens · Coach collects guests from the car park</div>
+        <div class="where"><span class="room"><i class="dot fg"></i>Reception</span>Ground floor</div>
+        <div class="detail">Put a table in reception. The group is off site until 16:00.</div>
+      </div>
+    </article>
+
+    <article class="ev">
+      <div class="time"><b>09:45</b><span>to 10:00</span></div>
+      <div class="pax"><b>18</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill tc">Tea &amp; Coffee</span></div>
+        <div class="title">University of Bath · Arrival</div>
+        <div class="where"><span class="room"><i class="dot f1"></i>Kennet Room</span>1st floor</div>
+        <div class="detail"><span class="dish">Tea and coffee station with home-baked snacks</span>
+          <div class="diet"><div class="h">Every break</div>1 guest takes no milk in hot drinks. Provide a non-dairy alternative.</div></div>
+      </div>
+    </article>
+
+    <article class="ev">
+      <div class="time"><b>11:00</b><span>to 11:30</span></div>
+      <div class="pax"><b>40</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill tc">Tea &amp; Coffee</span></div>
+        <div class="title">WASSH · Mid-morning break</div>
+        <div class="where"><span class="room"><i class="dot fg"></i>Admiralty Antechamber</span>Ground floor</div>
+        <div class="detail"><span class="dish">Tea and coffee station with home-baked snacks</span></div>
+      </div>
+    </article>
+
+    <article class="ev">
+      <div class="time"><b>11:00</b><span>to 11:30</span></div>
+      <div class="pax"><b>18</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill tc">Tea &amp; Coffee</span></div>
+        <div class="title">University of Bath · Mid-morning break</div>
+        <div class="where"><span class="room"><i class="dot f1"></i>Kennet Room</span>1st floor</div>
+        <div class="detail"><span class="dish">Tea and coffee station with home-baked snacks</span>
+          <div class="note">Same time as WASSH downstairs. Two stations needed at 11:00.</div></div>
+      </div>
+    </article>
+
+    <article class="ev">
+      <div class="time"><b>12:30</b><span>to 13:30</span></div>
+      <div class="pax"><b>18</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill lunch">Lunch</span></div>
+        <div class="title">University of Bath · Lunch</div>
+        <div class="where"><span class="room"><i class="dot fg"></i>The Vellore</span>Ground floor</div>
+        <div class="detail"><span class="dish">Chef's choice two-course hot and cold lunch</span>
+          <div class="diet"><div class="h">Special diets · 5</div>
+            <ul><li>3 × vegetarian</li><li>1 × no mushrooms</li><li>1 × non-dairy milk for hot drinks</li></ul></div></div>
+      </div>
+    </article>
+
+    <article class="ev setup">
+      <div class="time"><b>12:30</b><span>to 13:30</span></div>
+      <div class="pax"><b>–</b><span>reset</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill setup">Room reset</span></div>
+        <div class="title">Kennet: circle to 3 rounds of 6</div>
+        <div class="where"><span class="room"><i class="dot f1"></i>Kennet Room</span>while Uni are at lunch</div>
+        <div class="detail">Ready for the 13:30 cabaret session.</div>
+      </div>
+    </article>
+
+    <article class="ev">
+      <div class="time"><b>13:00</b><span>to 14:00</span></div>
+      <div class="pax"><b>40</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill lunch">Lunch</span></div>
+        <div class="title">WASSH · Lunch</div>
+        <div class="where"><span class="room"><i class="dot fg"></i>The Vellore</span>Ground floor</div>
+        <div class="detail"><span class="dish">Menu of the day</span>
+          <div class="note">Special diets: none.</div></div>
+      </div>
+    </article>
+
+    <article class="ev">
+      <div class="time"><b>14:30</b><span>to 15:00</span></div>
+      <div class="pax"><b>18</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill tc">Tea &amp; Coffee</span></div>
+        <div class="title">University of Bath · Afternoon break</div>
+        <div class="where"><span class="room"><i class="dot f1"></i>Kennet Room</span>1st floor</div>
+        <div class="detail"><span class="dish">Tea and coffee station with home-baked snacks</span></div>
+      </div>
+    </article>
+
+    <article class="ev quiet">
+      <div class="time"><b>16:00</b><span>to 17:00</span></div>
+      <div class="pax"><b>2</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill plain">Meeting</span></div>
+        <div class="title">University of Bath · Meeting</div>
+        <div class="where"><span class="room">Morrison Room</span>Boardroom</div>
+        <div class="detail">No catering booked.</div>
+      </div>
+    </article>
+
+    <article class="ev quiet">
+      <div class="time"><b>16:00</b></div>
+      <div class="pax"><b>78</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill plain">Check-in</span></div>
+        <div class="title">Siemens · Back at hotel, group check-in</div>
+        <div class="where"><span class="room"><i class="dot f1"></i>Outside Avon Room</span>1st floor</div>
+        <div class="detail">Registration table outside Avon for key handout. Guests pay their own extras as they go.
+          <div class="note"><b>ACF</b> arrives from 16:00 with an extra TV for Avon.</div></div>
+      </div>
+    </article>
+
+    <article class="ev setup">
+      <div class="time"><b>16:00</b><span>to 18:00</span></div>
+      <div class="pax"><b>–</b><span>reset</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill setup">Room reset</span></div>
+        <div class="title">Kennet: meeting room to evening bar</div>
+        <div class="where"><span class="room"><i class="dot f1"></i>Kennet Room</span>1st floor</div>
+        <div class="detail">Uni leave at 16:00. Clear down and have the bar set by 18:00.</div>
+      </div>
+    </article>
+
+    <article class="ev">
+      <div class="time"><b>18:00</b><span>to 19:30</span></div>
+      <div class="pax"><b>78</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill plain">Water station</span></div>
+        <div class="title">Siemens · Team building</div>
+        <div class="where"><span class="room"><i class="dot f1"></i>Avon Room</span>1st floor</div>
+        <div class="detail"><b>Water station in Avon from 18:00.</b>
+          <div class="note"><b>AV:</b> TV and microphone, 18:00 to 22:30.</div></div>
+      </div>
+    </article>
+
+    <article class="ev">
+      <div class="time"><b>18:00</b><span>to 23:00</span></div>
+      <div class="pax"><b>78</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill bar">Bar</span></div>
+        <div class="title">Siemens · Evening bar</div>
+        <div class="where"><span class="room"><i class="dot f1"></i>Kennet Room</span>1st floor</div>
+        <div class="detail"><b>Make sure the bar is well staffed.</b>
+          <div class="course">Bar tab · up to £2,500 · 19:00 to 23:00</div>
+          <ul><li>No double spirits</li><li>No champagne</li><li>No shots (e.g. sambuca)</li></ul>
+          <div class="note">Exceptions only with Chris W. or Russell G. The organiser signs for every extra.</div></div>
+      </div>
+    </article>
+
+    <article class="ev">
+      <div class="time"><b>19:00</b><span>to 21:30</span></div>
+      <div class="pax"><b>7</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill dinner">Dinner</span></div>
+        <div class="title">WASSH · Dinner</div>
+        <div class="where"><span class="room"><i class="dot fg"></i>The Vellore</span>Ground floor</div>
+        <div class="detail">
+          <div class="course">Starter</div><span class="dish">Honey glazed ham hock terrine, Granny Smith purée, pork crackling, piccalilli</span>
+          <div class="course">Main</div><span class="dish">Roasted lemon chicken, mushroom mix, bacon and mashed potato</span>
+          <div class="course">Dessert</div><span class="dish">Buttermilk panna cotta, summer berry compote and honeycomb</span>
+          <div class="note">£55 per person · Special diets: none · No drinks reception. Guests pay for their own drinks.</div></div>
+      </div>
+    </article>
+
+    <article class="ev">
+      <div class="time"><b>19:15</b><span>to 20:00</span></div>
+      <div class="pax"><b>78</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill canape">Canapés</span><span class="pill drinks">Drinks</span></div>
+        <div class="title">Siemens · Drinks reception</div>
+        <div class="where"><span class="room"><i class="dot fg"></i>Colonnade Bar</span>Ground floor</div>
+        <div class="detail">
+          <div class="course">Canapés</div><span class="dish">Selection of three, <span class="allergy">to be confirmed</span></span>
+          <div class="course">Drinks</div>
+          <ul><li>30 glasses of fizz</li><li>3 buckets of lager (5 Corona, 5 Peroni)</li><li>3 jugs of orange juice</li></ul></div>
+      </div>
+    </article>
+
+    <article class="ev setup">
+      <div class="time"><b>19:15</b><span>to 20:00</span></div>
+      <div class="pax"><b>–</b><span>reset</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill setup">Room reset</span></div>
+        <div class="title">Avon: team building to banquet for 78</div>
+        <div class="where"><span class="room"><i class="dot f1"></i>Avon Room</span>while guests are in the Colonnade</div>
+        <div class="detail">Fully laid by 20:00. Hotel dresses the tables with candles.</div>
+      </div>
+    </article>
+
+    <article class="ev">
+      <div class="time"><b>20:00</b><span>to 22:30</span></div>
+      <div class="pax"><b>78</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill dinner">Dinner</span></div>
+        <div class="title">Siemens · Banquet dinner</div>
+        <div class="where"><span class="room"><i class="dot f1"></i>Avon Room</span>1st floor</div>
+        <div class="detail">
+          <div class="course">Starter</div><span class="dish">Honey glazed ham hock terrine, Granny Smith purée, pork crackling, piccalilli</span>
+          <div class="course">Main</div><span class="dish">Roasted lemon chicken, mushroom mix, bacon and mashed potato</span>
+          <div class="course">Dessert</div><span class="dish">Buttermilk panna cotta, summer berry compote and honeycomb</span>
+          <div class="diet"><div class="h">Special diets · 11</div>
+            <ul><li><b>5 × halal</b></li><li>2 × vegetarian</li><li>1 × gluten free / coeliac</li><li>1 × fish and egg intolerant</li><li>1 × no raw meat (pâté) or raw eggs</li><li>1 × lactose and sulphite intolerant</li></ul></div>
+          <div class="course">Drinks on tables</div>
+          <ul><li>18 bottles house red and white</li><li>18 waters</li><li>9 buckets of lager (5 Peroni, 5 Corona)</li></ul></div>
+      </div>
+    </article>
+
+    <article class="ev quiet">
+      <div class="time"><b>Night</b></div>
+      <div class="pax"><b>88</b><span>rooms</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill plain">Bedrooms</span></div>
+        <div class="title">Overnight, breakfast Friday</div>
+        <div class="where"><span class="room"><i class="dot fg"></i>The Vellore</span>for breakfast</div>
+        <div class="detail">Siemens 78 rooms (15 are contractors who pay their own B&amp;B at checkout) · WASSH 10 rooms.</div>
+      </div>
+    </article>
+  </div>
+
+  <h3 class="section-title">To check</h3>
+  <div class="checks"><ol>
+    <li><b>Avon has only 45 minutes to turn round.</b> Team building runs to 19:30 and dinner for 78 starts at 20:00 in the same room. Ask Lucrezia if tables can be part-laid during team building, and have extra hands from 19:15.</li>
+    <li><b>5 halal guests, but the menu has pork.</b> Ham hock starter, bacon in the main and probably gelatine in the panna cotta. Chef needs a halal starter, halal chicken without bacon and a gelatine-free dessert.</li>
+    <li><b>Plate every other diet with chef.</b> Coeliac, lactose and sulphite, fish and egg, no raw meat or egg.</li>
+    <li><b>Siemens canapés are not confirmed.</b> Get the three choices from Lucrezia today.</li>
+    <li><b>Vellore lunches overlap from 13:00 to 13:30.</b> Uni (18) are still eating when WASSH (40) arrive. Keep the groups in separate areas.</li>
+    <li><b>Same menu twice tonight.</b> WASSH 7 at 19:00 in the Vellore and Siemens 78 at 20:00 in Avon. Agree pass times.</li>
+    <li><b>Coach at 09:15.</b> It is on both the Thursday and Friday Siemens sheets. Confirm which morning.</li>
+    <li><b>Siemens is Lucrezia's booking.</b> Take Siemens questions to her, not Benice.</li>
+  </ol></div>
+</section>
+
+<!-- ===================== FRIDAY ===================== -->
+<section class="day" id="fri" role="tabpanel" aria-labelledby="tab-fri">
+  <div class="day-head">
+    <h2>Friday 9 October</h2>
+    <p>Siemens (78) · WASSH (40) · Rugby for Heroes dinner (90)</p>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="k">Lunch</div><div class="v">100</div><div class="s">Avon buffet 60, Vellore 40</div></div>
+    <div class="stat"><div class="k">Dinner</div><div class="v">90</div><div class="s">Avon, 20:00</div></div>
+    <div class="stat"><div class="k">Arrival drinks</div><div class="v">90</div><div class="s">Antechamber, 19:00</div></div>
+    <div class="stat"><div class="k">Breakfast</div><div class="v">88</div><div class="s">Siemens and WASSH rooms</div></div>
+    <div class="stat"><div class="k">Tea &amp; coffee</div><div class="v">2 × 40</div><div class="s">WASSH</div></div>
+    <div class="stat"><div class="k">Bar open</div><div class="v">to 2am+</div><div class="s">Kennet, then main bar</div></div>
+  </div>
+
+  <h3 class="section-title">Timeline</h3>
+  <div class="list">
+    <article class="ev quiet">
+      <div class="time"><b>08:00</b><span>to 10:00</span></div>
+      <div class="pax"><b>–</b><span>set-up</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill plain">Set-up</span></div>
+        <div class="title">Siemens · ACF set up the quiz</div>
+        <div class="where"><span class="room"><i class="dot f1"></i>Avon Room</span>1st floor</div>
+        <div class="detail">ACF arrive between 08:30 and 09:00.</div>
+      </div>
+    </article>
+
+    <article class="ev quiet">
+      <div class="time"><b>08:00</b><span>to 18:00</span></div>
+      <div class="pax"><b>2</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill plain">Meeting</span></div>
+        <div class="title">Internal meeting</div>
+        <div class="where"><span class="room">Morrison Room</span>Boardroom</div>
+        <div class="detail">No catering booked.</div>
+      </div>
+    </article>
+
+    <article class="ev">
+      <div class="time"><b>08:30</b><span>to 09:00</span></div>
+      <div class="pax"><b>40</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill tc">Tea &amp; Coffee</span></div>
+        <div class="title">WASSH · Arrival</div>
+        <div class="where"><span class="room"><i class="dot fg"></i>Admiralty Antechamber</span>Ground floor</div>
+        <div class="detail"><span class="dish">Tea and coffee station with home-baked snacks</span>
+          <div class="note"><b>All day:</b> different milks and decaf coffee available.</div></div>
+      </div>
+    </article>
+
+    <article class="ev quiet">
+      <div class="time"><b>09:00</b><span>to 15:00</span></div>
+      <div class="pax"><b>40</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill plain">Meeting</span></div>
+        <div class="title">WASSH · All-day meeting</div>
+        <div class="where"><span class="room"><i class="dot fg"></i>Admiralty Room</span>Ground floor</div>
+        <div class="detail">Cabaret. Water and sweets.
+          <div class="note"><b>AV:</b> flipchart, pads and pens · TV and HDMI cable</div></div>
+      </div>
+    </article>
+
+    <article class="ev quiet">
+      <div class="time"><b>09:00</b><span>to 13:30</span></div>
+      <div class="pax"><b>78</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill plain">Meeting</span></div>
+        <div class="title">Siemens · Team building (Mega Quiz)</div>
+        <div class="where"><span class="room"><i class="dot f1"></i>Avon Room</span>1st floor</div>
+        <div class="detail">Cabaret.
+          <ul><li><b>10:00</b> quiz starts</li><li><b>12:00</b> quiz ends</li><li><b>12:30</b> short presentation, then lunch</li><li><b>13:00</b> ACF leave</li></ul>
+          <div class="note"><b>AV:</b> TV and microphone. Coach at 09:15 with a table in reception (see Thursday).</div></div>
+      </div>
+    </article>
+
+    <article class="ev">
+      <div class="time"><b>11:00</b><span>to 11:30</span></div>
+      <div class="pax"><b>40</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill tc">Tea &amp; Coffee</span></div>
+        <div class="title">WASSH · Mid-morning break</div>
+        <div class="where"><span class="room"><i class="dot fg"></i>The Vellore</span>Ground floor</div>
+        <div class="detail"><span class="dish">Tea and coffee station with home-baked snacks</span>
+          <div class="note"><b>Note:</b> in the Vellore today, not the Antechamber.</div></div>
+      </div>
+    </article>
+
+    <article class="ev">
+      <div class="time"><b>12:30</b><span>to 13:30</span></div>
+      <div class="pax"><b>60</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill lunch">Buffet</span></div>
+        <div class="title">Siemens · Sandwich lunch</div>
+        <div class="where"><span class="room"><i class="dot f1"></i>Avon Room</span>1st floor</div>
+        <div class="detail"><span class="dish">Selection of sandwiches</span> · £14.95 per person
+          <div class="note"><b>Have takeaway boxes ready.</b> Guests are leaving.</div>
+          <div class="diet"><div class="h">Special diets · 11</div>
+            <ul><li><b>5 × halal</b></li><li>2 × vegetarian</li><li>1 × gluten free / coeliac</li><li>1 × fish and egg intolerant</li><li>1 × no raw meat (pâté) or raw eggs</li><li>1 × lactose and sulphite intolerant</li></ul></div></div>
+      </div>
+    </article>
+
+    <article class="ev">
+      <div class="time"><b>13:00</b><span>to 14:00</span></div>
+      <div class="pax"><b>40</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill lunch">Lunch</span></div>
+        <div class="title">WASSH · Lunch</div>
+        <div class="where"><span class="room"><i class="dot fg"></i>The Vellore</span>Ground floor</div>
+        <div class="detail"><span class="dish">Menu of the day</span>
+          <div class="note">Special diets: <span class="allergy">to be confirmed</span></div></div>
+      </div>
+    </article>
+
+    <article class="ev setup">
+      <div class="time"><b>13:30</b><span>to 19:00</span></div>
+      <div class="pax"><b>–</b><span>set-up</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill setup">Room set-up</span></div>
+        <div class="title">Avon: set for Rugby for Heroes dinner</div>
+        <div class="where"><span class="room"><i class="dot f1"></i>Avon Room</span>Siemens clear by 13:30</div>
+        <div class="detail">
+          <ul>
+            <li>Banquet set, <b>white tablecloths</b>, <b>chiavari chairs</b>, no place cards</li>
+            <li>Hotel uplighters (no charge) · large TV in Avon · Bath AV brings a second TV · client brings extra PA</li>
+            <li>2 coat rails · 4 bar stools at the front</li>
+            <li>2 × 6ft clothed tables at the back, on the balcony, for the silent auction</li>
+            <li>2 easels for the A3 table plans: one at the Avon entrance, one downstairs</li>
+            <li>Signs to the reception drinks, the bar and Avon</li>
+            <li>Short drinks menu on every table</li>
+          </ul></div>
+      </div>
+    </article>
+
+    <article class="ev setup">
+      <div class="time"><b>15:00</b><span>to 19:00</span></div>
+      <div class="pax"><b>–</b><span>set-up</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill setup">Room reset</span></div>
+        <div class="title">Antechamber: set for arrival drinks</div>
+        <div class="where"><span class="room"><i class="dot fg"></i>Admiralty Antechamber</span>WASSH leave at 15:00</div>
+        <div class="detail">Reception for 90, plus a drinks table at the mirror at the bottom of the Avon stairs (terrace if the weather is nice).</div>
+      </div>
+    </article>
+
+    <article class="ev">
+      <div class="time"><b>19:00</b><span>to 19:45</span></div>
+      <div class="pax"><b>90</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill drinks">Drinks</span></div>
+        <div class="title">Rugby for Heroes · Arrival drinks</div>
+        <div class="where"><span class="room"><i class="dot fg"></i>Admiralty Antechamber</span>Ground floor</div>
+        <div class="detail">
+          <div class="course">One glass each</div>
+          <ul><li><b>70 fizz</b></li><li><b>20 non-alcoholic</b></li><li>Water available too</li></ul>
+          <div class="note">Bar open. Guests pay for any other drinks.</div></div>
+      </div>
+    </article>
+
+    <article class="ev">
+      <div class="time"><b>19:00</b><span>to late</span></div>
+      <div class="pax"><b>90</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill bar">Bar</span></div>
+        <div class="title">Rugby for Heroes · Evening bar</div>
+        <div class="where"><span class="room"><i class="dot f1"></i>Kennet Room</span>1st floor</div>
+        <div class="detail">Empty room. <b>Guests order and pay for their own drinks.</b> Extra drinks during dinner come from here.</div>
+      </div>
+    </article>
+
+    <article class="ev quiet">
+      <div class="time"><b>19:45</b><span>to 20:00</span></div>
+      <div class="pax"><b>90</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill plain">Call to dinner</span></div>
+        <div class="title">Announce dinner, guests go up to Avon</div>
+        <div class="where"><span class="room"><i class="dot f1"></i>Avon Room</span>1st floor</div>
+        <div class="detail">Wine and lager on the tables before the doors open.</div>
+      </div>
+    </article>
+
+    <article class="ev">
+      <div class="time"><b>20:00</b><span>to 22:00</span></div>
+      <div class="pax"><b>90</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill dinner">Dinner</span></div>
+        <div class="title">Rugby for Heroes · Set dinner</div>
+        <div class="where"><span class="room"><i class="dot f1"></i>Avon Room</span>1st floor</div>
+        <div class="detail">
+          <div class="note" style="margin-top:0"><b>Order:</b> welcome speech, starters, mains, gap (to confirm), desserts</div>
+          <div class="course">Starter</div><span class="dish">Log goats cheese bonbon, beetroot carpaccio, horseradish, aged balsamic (V)</span>
+          <div class="course">Main</div><span class="dish">Slow braised pork belly, broccoli, mustard mashed potato, red wine jus</span>
+          <div class="course">Vegetarian main</div><span class="dish">Spinach and ricotta tortellini, crispy sage (V)</span>
+          <div class="course">Dessert</div><span class="dish">Lemon meringue with raspberry ice cream</span>
+          <div class="course">To finish</div><span class="dish">Coffee and tea</span>
+          <div class="diet"><div class="h">Special diets by table · 7</div>
+            <ul>
+              <li><b>Table 1:</b> J.S. vegetarian</li>
+              <li><b>Table 2:</b> G.H. no red meat · J.B. vegetarian · K.K. <span class="allergy">nut allergy</span></li>
+              <li><b>Table 6:</b> G.M. no shellfish</li>
+              <li><b>Table 8:</b> R.C. <span class="allergy">shellfish allergy</span></li>
+              <li><b>Table 10:</b> J.B. vegetarian</li>
+            </ul></div>
+          <div class="course">Drinks on tables · half bottle of wine per person</div>
+          <ul><li><b>3 red and 1 white</b> per table</li><li>11 buckets of lager (4 Peroni, 2 Peroni 0.0, 4 Corona)</li></ul>
+          <div class="note"><b>20:30 to 22:30:</b> staff take drinks orders and payment at the tables. AV: TV and HDMI.</div></div>
+      </div>
+    </article>
+
+    <article class="ev quiet">
+      <div class="time"><b>22:00</b><span>to 23:15</span></div>
+      <div class="pax"><b>90</b><span>guests</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill plain">Auction</span></div>
+        <div class="title">Rugby for Heroes · Auction, charity and Q&amp;A</div>
+        <div class="where"><span class="room"><i class="dot f1"></i>Avon Room</span>1st floor</div>
+        <div class="detail">
+          <ul><li><b>22:00</b> auction and charity</li><li><b>22:30</b> Q&amp;A with Mike and Lewis</li><li><b>23:15</b> finish</li></ul>
+          <div class="note">Clear desserts and serve coffee before 22:00.</div></div>
+      </div>
+    </article>
+
+    <article class="ev">
+      <div class="time"><b>23:15</b><span>to 2am+</span></div>
+      <div class="pax"><b>90</b><span>max</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill bar">Bar</span></div>
+        <div class="title">Rugby for Heroes · Main bar after the event</div>
+        <div class="where"><span class="room"><i class="dot fg"></i>Colonnade Bar</span>Ground floor</div>
+        <div class="detail"><b>Keep a member of staff on duty (nights) so guests can drink until 2am or later.</b> Guests pay their own.</div>
+      </div>
+    </article>
+
+    <article class="ev quiet">
+      <div class="time"><b>Night</b></div>
+      <div class="pax"><b>8</b><span>rooms</span></div>
+      <div class="main">
+        <div class="tags"><span class="pill plain">Bedrooms</span></div>
+        <div class="title">Rugby for Heroes · Overnight, breakfast Saturday</div>
+        <div class="where"><span class="room"><i class="dot fg"></i>The Vellore</span>for breakfast</div>
+        <div class="detail">8 classic singles, bed and breakfast. Extras go on the bedrooms.</div>
+      </div>
+    </article>
+  </div>
+
+  <h3 class="section-title">To check</h3>
+  <div class="checks"><ol>
+    <li><b>Siemens lunch is booked for 60, but 78 are on site.</b> Confirm the final number with Lucrezia.</li>
+    <li><b>WASSH lunch diets are not confirmed.</b> Ask Benice before 11:00.</li>
+    <li><b>How many vegetarian mains?</b> 3 vegetarians are named. G.H. (table 2, no red meat) also can't have the pork belly.</li>
+    <li><b>Nut allergy on table 2, shellfish allergy on table 8.</b> Chef to check the bonbon, jus, meringue and ice cream, and mark both plates at the pass.</li>
+    <li><b>Running order not final.</b> The "gap" between mains and dessert, the AV and the entertainment are still to be confirmed with Benice.</li>
+    <li><b>Number of tables.</b> The wine (3 + 1 per table) and 11 lager buckets suggest 11 tables. Check against the table plan.</li>
+    <li><b>Late staffing.</b> Kennet bar, drinks service at the tables 20:30 to 22:30, and the main bar to 2am+.</li>
+  </ol></div>
+</section>
+
+<footer>
+  <span>Source: Benice's event pack, last printed 2 to 6 October 2026. Dashed cards are room resets we planned; they are not on the event sheet.</span>
+  <span>Guest names are shortened to initials. Full names are on the event sheet.</span>
+</footer>
+</div>
+
+<script>
+(function(){
+  var ids=["wed","thu","fri"];
+  var dates={"2026-10-07":"wed","2026-10-08":"thu","2026-10-09":"fri"};
+  var tabs=ids.map(function(id){return document.getElementById("tab-"+id)});
+  function show(id,focus){
+    ids.forEach(function(d,i){
+      var on=d===id;
+      document.getElementById(d).hidden=!on;
+      tabs[i].setAttribute("aria-selected",on?"true":"false");
+      tabs[i].tabIndex=on?0:-1;
+      if(on&&focus)tabs[i].focus();
+    });
+  }
+  tabs.forEach(function(t,i){
+    t.addEventListener("click",function(){
+      show(ids[i]);
+      try{history.replaceState(null,"","#"+ids[i])}catch(e){}
+      window.scrollTo({top:0,behavior:"auto"});
+    });
+    t.addEventListener("keydown",function(e){
+      if(e.key==="ArrowRight")show(ids[(i+1)%3],true);
+      if(e.key==="ArrowLeft")show(ids[(i+2)%3],true);
+    });
+  });
+  var start="wed";
+  var h=(location.hash||"").replace("#","");
+  if(ids.indexOf(h)>-1){start=h}
+  else{
+    try{
+      var today=new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/London"}).format(new Date());
+      if(dates[today])start=dates[today];
+    }catch(e){}
+  }
+  show(start);
+  var todayKey=null;
+  try{todayKey=dates[new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/London"}).format(new Date())]}catch(e){}
+  if(todayKey){var s=document.querySelector("#tab-"+todayKey+" small");if(s)s.textContent="Today";}
+})();
+</script>
+</body>
+</html>

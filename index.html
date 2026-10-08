@@ -222,6 +222,53 @@ footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);font-si
 @keyframes slideR{from{opacity:0;transform:translateX(-18px)}to{opacity:1;transform:none}}
 .block-title{font-size:17px;font-weight:700;margin:22px 2px 8px}
 
+/* Round tables with chairs */
+.cell{align-items:center;text-align:center}
+.cell .rt{width:min(70px,100%);height:auto;display:block;margin:0 auto}
+.cell .who{display:grid;gap:3px;width:100%;margin-top:2px}
+.cell .spl{text-align:left;padding:2px 6px}
+.cell .spl b{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cell .ok{text-align:center}
+.cat-halal{--c:#0b7285} .cat-veg{--c:#1f7a3a} .cat-fish{--c:#0071e3} .cat-gf{--c:#b26a00} .cat-med{--c:#c4281c} .cat-none{--c:#1d1d1f}
+
+/* Table detail layer */
+.tlayer{position:absolute;inset:0;z-index:5;visibility:hidden}
+.tlayer.open{visibility:visible}
+.tscrim{position:absolute;inset:0;background:rgba(0,0,0,.28);opacity:0;transition:opacity 260ms ease}
+.tlayer.open .tscrim{opacity:1}
+.tbox{position:absolute;left:0;right:0;bottom:0;max-height:90%;background:var(--card);border-radius:18px 18px 0 0;transform:translateY(100%);transition:transform 380ms var(--ease-sheet);display:flex;flex-direction:column;box-shadow:0 -8px 30px rgba(0,0,0,.16)}
+.tlayer.open .tbox{transform:none}
+.tbox-head{flex:none;display:flex;align-items:center;gap:10px;padding:12px 14px 10px;border-bottom:1px solid var(--hair)}
+.tbox-head .nav{flex:none;width:34px;height:34px;border-radius:50%;border:0;background:var(--fill);font-size:20px;line-height:1;cursor:pointer;display:grid;place-items:center;transition:transform 120ms var(--ease-out)}
+.tbox-head .nav:active{transform:scale(.92)}
+.tbox-head .nav:focus-visible{outline:2px solid var(--blue)}
+.tbox-head .ttl{flex:1;min-width:0;text-align:center}
+.tbox-head .ttl h3{font-size:19px;font-weight:700}
+.tbox-head .ttl p{margin:0;font-size:12px;color:var(--ink2)}
+.tbox-body{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:12px 14px calc(22px + env(safe-area-inset-bottom,0px))}
+.tbox-body.swap{animation:swap 240ms var(--ease-out) both}
+.big-rt{display:block;width:min(190px,60%);height:auto;margin:0 auto}
+.ctiles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:10px}
+.ctile{border:1.5px solid transparent;background:var(--bg);border-radius:12px;padding:8px;text-align:center;cursor:pointer;font:inherit;color:inherit;transition:border-color 180ms ease,background-color 180ms ease}
+.ctile b{display:block;font-size:13px}
+.ctile span{display:block;font-size:12px;color:var(--ink2);margin-top:1px}
+.ctile span.r{color:var(--alert);font-weight:600}
+.ctile[aria-pressed="true"]{border-color:var(--ink);background:#fff}
+.ctile:focus-visible{outline:2px solid var(--blue)}
+.gcard{margin-top:10px;border:1px solid var(--alert-line);background:var(--alert-bg);border-radius:14px;padding:10px 12px;border-left:4px solid var(--c)}
+.gcard .top{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px}
+.gcard .nm{font-weight:700;font-size:16px}
+.plates{margin-top:8px;display:grid;gap:4px}
+.plate{display:grid;grid-template-columns:72px minmax(0,1fr);gap:8px;font-size:14px;line-height:1.35;padding:4px 6px;border-radius:8px;color:var(--ink2)}
+.plate b{font-weight:600;color:var(--ink2);font-size:12px;text-transform:uppercase;letter-spacing:.05em;padding-top:1px}
+.plate.now{background:#fff;color:var(--ink);font-weight:600}
+.plate.now b{color:var(--ink)}
+.plate .x{color:var(--alert);font-weight:700}
+.rest{margin-top:14px}
+.rest h4{margin:0 0 6px;font-size:14px;font-weight:700}
+.rest p{margin:0 0 8px;font-size:13px;color:var(--ink2)}
+.seat-note{margin-top:14px;font-size:12px;color:var(--ink3);text-align:center}
+
 /* Table cards */
 .tables{display:grid;gap:10px;margin-top:12px}
 @media (min-width:720px){.tables{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -286,7 +333,7 @@ footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);font-si
       <div class="ph-row">
         <div>
           <h2 id="planTitle">Siemens dinner · Avon</h2>
-          <p>Thu 8 Oct · 20:00 · 74 guests · swipe to change course, tap a table for names</p>
+          <p>Thu 8 Oct · 20:00 · 74 guests · tap a table for details, swipe to change course</p>
         </div>
         <button class="close" data-close aria-label="Close table plan">
           <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="#1d1d1f" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
@@ -300,6 +347,20 @@ footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);font-si
       </div>
     </div>
     <div class="panel-body" id="planBody"></div>
+    <div class="tlayer" id="tlayer" aria-hidden="true">
+      <div class="tscrim" data-tclose></div>
+      <div class="tbox" role="dialog" aria-modal="true" aria-labelledby="tTitle">
+        <div class="tbox-head">
+          <button class="nav" data-tprev aria-label="Previous table">&#8249;</button>
+          <div class="ttl"><h3 id="tTitle">Table</h3><p id="tSub"></p></div>
+          <button class="nav" data-tnext aria-label="Next table">&#8250;</button>
+          <button class="close" data-tclose aria-label="Close table">
+            <svg width="12" height="12" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="#1d1d1f" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+          </button>
+        </div>
+        <div class="tbox-body" id="tBody"></div>
+      </div>
+    </div>
   </section>
 </div>
 
@@ -558,6 +619,19 @@ function specialsFor(t,c){return t.g.filter(function(p){return p.c&&p.c[c]})}
 
 function byNo(n){return TABLES.filter(function(t){return t.no===n})[0]}
 var COURSES=["s","m","d"];
+var CAT_COLOR={halal:"#0b7285",veg:"#1f7a3a",fish:"#0071e3",gf:"#b26a00",med:"#c4281c",none:"#1d1d1f"};
+function tableSVG(t,c,cls,big){
+  var n=t.g.length,R=40,html='<svg class="'+cls+'" viewBox="0 0 100 100" role="img" aria-label="Table '+t.no+' with '+n+' chairs">';
+  t.g.forEach(function(p,i){
+    var a=-Math.PI/2+i*2*Math.PI/n,x=50+R*Math.cos(a),y=50+R*Math.sin(a);
+    var sp=p.c&&p.c[c],col=sp?CAT_COLOR[p.q[c][1]]:"#d2d2d7";
+    html+='<circle cx="'+x.toFixed(2)+'" cy="'+y.toFixed(2)+'" r="'+(sp?7.5:6.5)+'" fill="'+col+'"'+(sp?' stroke="#fff" stroke-width="1.5"':'')+'/>';
+  });
+  html+='<circle cx="50" cy="50" r="27" fill="#fff" stroke="#c7c7cc" stroke-width="1.5"/>';
+  html+='<text x="50" y="'+(big?52:53)+'" text-anchor="middle" font-size="'+(big?20:22)+'" font-weight="700" fill="#1d1d1f" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial,sans-serif">'+t.no+'</text>';
+  html+='<text x="50" y="'+(big?65:66)+'" text-anchor="middle" font-size="8.5" fill="#6e6e73" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial,sans-serif">'+n+' guests</text>';
+  return html+'</svg>';
+}
 function renderPlan(dir){
   var c=state.course;
   markCourse(c);
@@ -574,24 +648,14 @@ function renderPlan(dir){
 
   var cells=TABLES.map(function(t){
     var sp=specialsFor(t,c),stdN=t.g.length-sp.length;
-    var body=sp.length
-      ?'<div class="stdl"><b>'+stdN+'</b> standard</div>'+sp.map(function(p){return '<div class="spl '+p.q[c][1]+'"><b>'+esc(p.n)+'</b><span>'+esc(p.q[c][0])+'</span></div>'}).join("")
-      :'<div class="ok">All '+stdN+' standard</div>';
-    return '<button class="cell'+(sp.length?" has":"")+'" data-t="'+t.no+'" aria-label="Table '+t.no+', '+t.g.length+' guests, '+sp.length+' special. Show names."><div class="ch"><span class="tno">'+t.no+'</span><span class="tpx">'+t.g.length+' guests</span></div>'+body+'</button>';
+    var who=sp.length
+      ?sp.map(function(p){return '<div class="spl '+p.q[c][1]+'" title="'+esc(p.q[c][0])+'"><b>'+esc(p.n)+'</b></div>'}).join("")
+      :'<div class="ok">All standard</div>';
+    return '<button class="cell'+(sp.length?" has":"")+'" data-t="'+t.no+'" aria-label="Table '+t.no+': '+t.g.length+' guests, '+stdN+' standard, '+sp.length+' special. Open table.">'+
+      tableSVG(t,c,"rt")+'<div class="who">'+who+'</div></button>';
   }).join("");
 
   var altHtml=Object.keys(alts).map(function(k){return '<div class="alt"><span class="num">'+alts[k].length+'×</span><span class="what">'+esc(k)+'</span><span class="who">'+esc(alts[k].join(" · "))+'</span></div>'}).join("");
-
-  var tablesHtml=DETAIL_ORDER.map(byNo).map(function(t){
-    var sp=specialsFor(t,c),stdN=t.g.length-sp.length;
-    var spHtml=sp.map(function(p){
-      return '<div class="sp"><div class="top"><span class="nm">'+esc(p.n)+'</span>'+p.r.map(function(r){return '<span class="req'+(r[1]?" med":"")+'">'+esc(r[0])+'</span>'}).join("")+'</div><div class="eat">'+esc(p.c[c])+'</div></div>';
-    }).join("");
-    var names=t.g.map(function(p){return '<span class="nm-chip'+(p.c&&p.c[c]?" s":"")+'">'+esc(p.n)+'</span>'}).join("");
-    return '<article class="tcard" id="tcard-'+t.no+'"><div class="tcard-h"><h3>Table '+t.no+'</h3><span>'+t.g.length+' guests'+(sp.length?' · '+sp.length+' special':'')+'</span></div>'+
-      (stdN?'<div class="std"><span class="n">'+stdN+' ×</span><span class="w">'+esc(DISH[c])+'</span></div>':"")+spHtml+
-      '<div class="names">'+names+'</div></article>';
-  }).join("");
 
   planBody.innerHTML=
     '<div class="ov'+anim+'" id="overview">'+
@@ -599,25 +663,68 @@ function renderPlan(dir){
       '<div class="back-label">Back of room</div>'+
       '<div class="grid">'+cells+'</div>'+
       '<div class="tvbar">TV · FRONT</div>'+
-      '<div class="keyrow"><span><i style="background:#0b7285"></i>Halal</span><span><i style="background:#1f7a3a"></i>Vegetarian</span><span><i style="background:#0071e3"></i>Pescetarian</span><span><i style="background:#b26a00"></i>Gluten free</span><span><i style="background:#c4281c"></i>Intolerance</span></div>'+
+      '<div class="keyrow"><span><i style="background:#0b7285"></i>Halal</span><span><i style="background:#1f7a3a"></i>Vegetarian</span><span><i style="background:#0071e3"></i>Pescetarian</span><span><i style="background:#b26a00"></i>Gluten free</span><span><i style="background:#c4281c"></i>Intolerance</span><span><i style="background:#d2d2d7"></i>Standard</span></div>'+
     '</div>'+
     '<h3 class="block-title">Kitchen summary · '+COURSE_NAME[c]+'</h3>'+
     '<div class="dish-hero"><div class="counts"><div class="count"><div class="v">'+total+'</div><div class="k">Covers</div></div><div class="count"><div class="v">'+std+'</div><div class="k">Standard</div></div><div class="count warn"><div class="v">'+altCount+'</div><div class="k">Special</div></div></div>'+
       '<div class="alts">'+altHtml+'</div></div>'+
-    '<h3 class="block-title">Table by table · '+COURSE_NAME[c]+'</h3>'+
-    '<div class="tables">'+tablesHtml+'</div>'+
     '<p class="plan-note">Special plates show what each guest needs. Chef decides the exact dish. Booking is for 78; this plan has 74 names.</p>';
 
   [].forEach.call(planBody.querySelectorAll(".cell"),function(b){
-    b.addEventListener("click",function(){
-      var tc=$("#tcard-"+b.getAttribute("data-t"),planBody);
-      var top=tc.getBoundingClientRect().top-planBody.getBoundingClientRect().top+planBody.scrollTop-12;
-      planBody.scrollTo({top:top,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
-      tc.classList.remove("flash");void tc.offsetWidth;tc.classList.add("flash");
-      setTimeout(function(){tc.classList.remove("flash")},1400);
-    });
+    b.addEventListener("click",function(){openTable(+b.getAttribute("data-t"),b)});
   });
+  if(tOpen)renderTable(false);
 }
+
+/* ---------- Table detail ---------- */
+var tlayer=$("#tlayer"),tBody=$("#tBody"),tOpen=null,tFrom=null;
+var ORDER=[1,2,3,4,5,6,7,8,9];
+function renderTable(anim){
+  var t=byNo(tOpen),c=state.course;
+  $("#tTitle").textContent="Table "+t.no;
+  $("#tSub").textContent=t.g.length+" guests · "+COURSE_NAME[c]+" shown on the chairs";
+  var specials=t.g.filter(function(p){return p.c&&(p.c.s||p.c.m||p.c.d)});
+  var others=t.g.filter(function(p){return specials.indexOf(p)<0});
+  var tiles=["s","m","d"].map(function(k){
+    var n=specialsFor(t,k).length;
+    return '<button class="ctile" data-c="'+k+'" aria-pressed="'+(k===c)+'"><b>'+COURSE_NAME[k]+'</b><span>'+(t.g.length-n)+' standard</span><span class="'+(n?"r":"")+'">'+(n?n+" special":"no specials")+'</span></button>';
+  }).join("");
+  var g=specials.map(function(p){
+    var cat=(p.q.s||p.q.m||p.q.d)[1];
+    var rows=["s","m","d"].map(function(k){
+      var v=p.c[k];
+      return '<div class="plate'+(k===c?" now":"")+'"><b>'+COURSE_NAME[k]+'</b><span'+(v==="NO DESSERT"?' class="x"':'')+'>'+(v?esc(v):"Standard: "+esc(DISH[k]))+'</span></div>';
+    }).join("");
+    return '<div class="gcard cat-'+cat+'"><div class="top"><span class="nm">'+esc(p.n)+'</span>'+p.r.map(function(r){return '<span class="req'+(r[1]?" med":"")+'">'+esc(r[0])+'</span>'}).join("")+'</div><div class="plates">'+rows+'</div></div>';
+  }).join("");
+  tBody.innerHTML=
+    tableSVG(t,c,"big-rt",true)+
+    '<div class="ctiles">'+tiles+'</div>'+
+    (specials.length?'<div class="rest"><h4>Special plates · '+specials.length+'</h4></div>'+g:'<div class="rest"><h4>No special plates at this table</h4></div>')+
+    '<div class="rest"><h4>Standard on all three courses · '+others.length+'</h4><div class="names">'+others.map(function(p){return '<span class="nm-chip">'+esc(p.n)+'</span>'}).join("")+'</div></div>'+
+    '<p class="seat-note">Chairs show who needs a special plate, not fixed seats. Ask the guest\'s name before serving.</p>';
+  if(anim){tBody.classList.remove("swap");void tBody.offsetWidth;tBody.classList.add("swap")}
+  [].forEach.call(tBody.querySelectorAll(".ctile"),function(b){b.addEventListener("click",function(){goCourse(b.getAttribute("data-c"))})});
+}
+function openTable(no,from){
+  tOpen=no;tFrom=from||null;
+  renderTable(false);tBody.scrollTop=0;
+  tlayer.setAttribute("aria-hidden","false");
+  requestAnimationFrame(function(){tlayer.classList.add("open");setTimeout(function(){var x=tlayer.querySelector(".close");if(x)x.focus({preventScroll:true})},60)});
+}
+function closeTable(){
+  if(!tOpen)return;
+  tOpen=null;tlayer.classList.remove("open");tlayer.setAttribute("aria-hidden","true");
+  if(tFrom&&tFrom.isConnected)tFrom.focus({preventScroll:true});
+}
+function stepTable(d){
+  var i=ORDER.indexOf(tOpen);tOpen=ORDER[(i+d+ORDER.length)%ORDER.length];
+  renderTable(true);tBody.scrollTop=0;
+}
+[].forEach.call(tlayer.querySelectorAll("[data-tclose]"),function(b){b.addEventListener("click",closeTable)});
+tlayer.querySelector("[data-tprev]").addEventListener("click",function(){stepTable(-1)});
+tlayer.querySelector("[data-tnext]").addEventListener("click",function(){stepTable(1)});
+
 function goCourse(c,dir){
   if(c===state.course)return;
   if(dir===undefined)dir=COURSES.indexOf(c)>COURSES.indexOf(state.course)?1:-1;
@@ -654,6 +761,7 @@ function openPlan(from){
 }
 function closePlan(){
   if(!sheet.classList.contains("open"))return;
+  closeTable();
   sheet.classList.add("closing");sheet.classList.remove("open");
   sheet.setAttribute("aria-hidden","true");
   document.documentElement.style.overflow="";
@@ -661,7 +769,7 @@ function closePlan(){
   if(lastFocus&&lastFocus.focus)lastFocus.focus({preventScroll:true});
 }
 [].forEach.call(sheet.querySelectorAll("[data-close]"),function(b){b.addEventListener("click",closePlan)});
-document.addEventListener("keydown",function(e){if(e.key==="Escape")closePlan()});
+document.addEventListener("keydown",function(e){if(e.key!=="Escape")return;if(tOpen)closeTable();else closePlan()});
 
 /* ---------------- Start ---------------- */
 var h=(location.hash||"").replace("#","");

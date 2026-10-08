@@ -269,6 +269,32 @@ footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);font-si
 .rest p{margin:0 0 8px;font-size:13px;color:var(--ink2)}
 .seat-note{margin-top:14px;font-size:12px;color:var(--ink3);text-align:center}
 
+/* Avon floor plan */
+.room-map{position:relative;width:100%;aspect-ratio:7/9;margin-top:4px;border-radius:14px;border:1px solid var(--hair);background:radial-gradient(circle at 1px 1px,#e6e6eb 1px,transparent 1.3px) 0 0/16px 16px,#fbfbfd}
+@media (min-width:640px){.room-map{aspect-ratio:5/4}}
+.mt{position:absolute;transform:translate(-50%,-50%);width:27%;max-width:160px;padding:0;border:0;background:transparent;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform 160ms var(--ease-out)}
+.mt.big{width:31%;max-width:180px} .mt.small{width:23%;max-width:140px} .mt.round{width:23%;max-width:140px}
+.mt svg{display:block;width:100%;height:auto;overflow:visible}
+.mt:active{transform:translate(-50%,-50%) scale(.95)}
+.mt:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:12px}
+.mt .tb{transition:fill 180ms ease,stroke 180ms ease}
+.mt.has .tb{stroke:var(--alert);stroke-width:2}
+.mt .bdg{position:absolute;top:-4px;right:-2px;min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:var(--alert);color:#fff;font-size:12px;font-weight:700;display:grid;place-items:center;box-shadow:0 0 0 2px #fff;animation:pop 300ms var(--ease-out)}
+@keyframes pop{0%{transform:scale(.6)}60%{transform:scale(1.12)}100%{transform:scale(1)}}
+.room-map .tv{position:absolute;left:51%;top:93%;transform:translate(-50%,-50%);width:44%;height:24px;border-radius:6px;background:var(--ink);color:#fff;font-size:11px;font-weight:700;letter-spacing:.14em;display:grid;place-items:center}
+.map-key{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 14px;margin-top:8px;font-size:12px;color:var(--ink2)}
+.map-key span{display:inline-flex;align-items:center;gap:6px}
+.map-key .k1{display:inline-grid;place-items:center;min-width:18px;height:18px;border-radius:9px;background:var(--alert);color:#fff;font-size:11px;font-weight:700;padding:0 5px}
+.map-key .k2{width:10px;height:10px;border-radius:50%;background:#d2d2d7;display:inline-block}
+.dish-line{background:var(--bg);border-radius:12px;padding:10px 12px;margin-top:12px}
+.dish-line .k{font-size:12px;font-weight:600;color:var(--ink2);text-transform:uppercase;letter-spacing:.06em}
+.dish-line .d{font-size:16px;font-weight:600;margin-top:2px;line-height:1.3}
+.big-n{display:flex;align-items:baseline;gap:8px;margin-top:6px}
+.big-n b{font-size:26px;font-weight:700;font-variant-numeric:tabular-nums}
+.big-n span{font-size:14px;color:var(--ink2)}
+.gcard .eat2{margin-top:6px;font-size:17px;font-weight:600;line-height:1.3}
+.gcard .eat2.x{color:var(--alert)}
+
 /* Table cards */
 .tables{display:grid;gap:10px;margin-top:12px}
 @media (min-width:720px){.tables{grid-template-columns:repeat(2,minmax(0,1fr))}}
@@ -333,7 +359,7 @@ footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);font-si
       <div class="ph-row">
         <div>
           <h2 id="planTitle">Siemens dinner · Avon</h2>
-          <p>Thu 8 Oct · 20:00 · 74 guests · tap a table for details, swipe to change course</p>
+          <p>Thu 8 Oct · 20:00 · 74 guests · tap a table for details</p>
         </div>
         <button class="close" data-close aria-label="Close table plan">
           <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="#1d1d1f" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
@@ -619,17 +645,20 @@ function specialsFor(t,c){return t.g.filter(function(p){return p.c&&p.c[c]})}
 
 function byNo(n){return TABLES.filter(function(t){return t.no===n})[0]}
 var COURSES=["s","m","d"];
-var CAT_COLOR={halal:"#0b7285",veg:"#1f7a3a",fish:"#0071e3",gf:"#b26a00",med:"#c4281c",none:"#1d1d1f"};
-function tableSVG(t,c,cls,big){
-  var n=t.g.length,R=40,html='<svg class="'+cls+'" viewBox="0 0 100 100" role="img" aria-label="Table '+t.no+' with '+n+' chairs">';
-  t.g.forEach(function(p,i){
-    var a=-Math.PI/2+i*2*Math.PI/n,x=50+R*Math.cos(a),y=50+R*Math.sin(a);
-    var sp=p.c&&p.c[c],col=sp?CAT_COLOR[p.q[c][1]]:"#d2d2d7";
-    html+='<circle cx="'+x.toFixed(2)+'" cy="'+y.toFixed(2)+'" r="'+(sp?7.5:6.5)+'" fill="'+col+'"'+(sp?' stroke="#fff" stroke-width="1.5"':'')+'/>';
-  });
-  html+='<circle cx="50" cy="50" r="27" fill="#fff" stroke="#c7c7cc" stroke-width="1.5"/>';
-  html+='<text x="50" y="'+(big?52:53)+'" text-anchor="middle" font-size="'+(big?20:22)+'" font-weight="700" fill="#1d1d1f" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial,sans-serif">'+t.no+'</text>';
-  html+='<text x="50" y="'+(big?65:66)+'" text-anchor="middle" font-size="8.5" fill="#6e6e73" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial,sans-serif">'+n+' guests</text>';
+var POS={1:[83,76,"oval"],2:[17,76,"oval"],3:[50,59,"big"],4:[16,47,"oval"],5:[50,41,"oval"],6:[83,42,"round"],7:[51,25,"small"],8:[19,9.5,"oval"],9:[81,9.5,"oval"]};
+var FONT='font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial,sans-serif"';
+function tableSVG(t){
+  var n=t.g.length,shape=POS[t.no][2],round=shape==="round";
+  var W=round?100:120,H=round?100:84,cx=W/2,cy=H/2;
+  var rx=round?27:37,ry=round?27:21,crx=round?40:51,cry=round?40:33;
+  var html='<svg viewBox="-4 -4 '+(W+8)+' '+(H+8)+'" aria-hidden="true">';
+  for(var i=0;i<n;i++){
+    var a=-Math.PI/2+i*2*Math.PI/n;
+    html+='<circle cx="'+(cx+crx*Math.cos(a)).toFixed(1)+'" cy="'+(cy+cry*Math.sin(a)).toFixed(1)+'" r="6.5" fill="#d2d2d7"/>';
+  }
+  html+='<ellipse class="tb" cx="'+cx+'" cy="'+cy+'" rx="'+rx+'" ry="'+ry+'" fill="#fff" stroke="#b7b7bd" stroke-width="1.5"/>';
+  html+='<text x="'+cx+'" y="'+(cy+(round?2:3))+'" text-anchor="middle" font-size="'+(round?20:19)+'" font-weight="700" fill="#1d1d1f" '+FONT+'>'+t.no+'</text>';
+  html+='<text x="'+cx+'" y="'+(cy+(round?14:13))+'" text-anchor="middle" font-size="8" fill="#6e6e73" '+FONT+'>'+n+' guests</text>';
   return html+'</svg>';
 }
 function renderPlan(dir){
@@ -646,13 +675,10 @@ function renderPlan(dir){
   var std=total-altCount;
   var anim=dir===1?" slide-l":dir===-1?" slide-r":"";
 
-  var cells=TABLES.map(function(t){
-    var sp=specialsFor(t,c),stdN=t.g.length-sp.length;
-    var who=sp.length
-      ?sp.map(function(p){return '<div class="spl '+p.q[c][1]+'" title="'+esc(p.q[c][0])+'"><b>'+esc(p.n)+'</b></div>'}).join("")
-      :'<div class="ok">All standard</div>';
-    return '<button class="cell'+(sp.length?" has":"")+'" data-t="'+t.no+'" aria-label="Table '+t.no+': '+t.g.length+' guests, '+stdN+' standard, '+sp.length+' special. Open table.">'+
-      tableSVG(t,c,"rt")+'<div class="who">'+who+'</div></button>';
+  var tables=TABLES.map(function(t){
+    var sp=specialsFor(t,c).length,pos=POS[t.no];
+    return '<button class="mt '+pos[2]+(sp?" has":"")+'" data-t="'+t.no+'" style="left:'+pos[0]+'%;top:'+pos[1]+'%" aria-label="Table '+t.no+': '+t.g.length+' guests, '+(sp?sp+" special "+COURSE_NAME[c].toLowerCase():"all standard")+'. Open table.">'+
+      tableSVG(t)+(sp?'<span class="bdg">'+sp+'</span>':'')+'</button>';
   }).join("");
 
   var altHtml=Object.keys(alts).map(function(k){return '<div class="alt"><span class="num">'+alts[k].length+'×</span><span class="what">'+esc(k)+'</span><span class="who">'+esc(alts[k].join(" · "))+'</span></div>'}).join("");
@@ -660,49 +686,45 @@ function renderPlan(dir){
   planBody.innerHTML=
     '<div class="ov'+anim+'" id="overview">'+
       '<div class="ov-top"><span class="dish">'+esc(DISH[c])+'</span><span class="tot">'+std+' std · <b>'+altCount+' special</b></span></div>'+
-      '<div class="back-label">Back of room</div>'+
-      '<div class="grid">'+cells+'</div>'+
-      '<div class="tvbar">TV · FRONT</div>'+
-      '<div class="keyrow"><span><i style="background:#0b7285"></i>Halal</span><span><i style="background:#1f7a3a"></i>Vegetarian</span><span><i style="background:#0071e3"></i>Pescetarian</span><span><i style="background:#b26a00"></i>Gluten free</span><span><i style="background:#c4281c"></i>Intolerance</span><span><i style="background:#d2d2d7"></i>Standard</span></div>'+
+      '<div class="back-label">Back of Avon</div>'+
+      '<div class="room-map">'+tables+'<div class="tv">TV · FRONT</div></div>'+
+      '<div class="map-key"><span><span class="k1">2</span>special plates this course</span><span><i class="k2"></i>guest (any seat)</span></div>'+
     '</div>'+
     '<h3 class="block-title">Kitchen summary · '+COURSE_NAME[c]+'</h3>'+
     '<div class="dish-hero"><div class="counts"><div class="count"><div class="v">'+total+'</div><div class="k">Covers</div></div><div class="count"><div class="v">'+std+'</div><div class="k">Standard</div></div><div class="count warn"><div class="v">'+altCount+'</div><div class="k">Special</div></div></div>'+
       '<div class="alts">'+altHtml+'</div></div>'+
     '<p class="plan-note">Special plates show what each guest needs. Chef decides the exact dish. Booking is for 78; this plan has 74 names.</p>';
 
-  [].forEach.call(planBody.querySelectorAll(".cell"),function(b){
+  [].forEach.call(planBody.querySelectorAll(".mt"),function(b){
     b.addEventListener("click",function(){openTable(+b.getAttribute("data-t"),b)});
   });
   if(tOpen)renderTable(false);
 }
 
-/* ---------- Table detail ---------- */
+/* ---------- Table detail: selected course only ---------- */
 var tlayer=$("#tlayer"),tBody=$("#tBody"),tOpen=null,tFrom=null;
 var ORDER=[1,2,3,4,5,6,7,8,9];
 function renderTable(anim){
   var t=byNo(tOpen),c=state.course;
   $("#tTitle").textContent="Table "+t.no;
-  $("#tSub").textContent=t.g.length+" guests · "+COURSE_NAME[c]+" shown on the chairs";
-  var specials=t.g.filter(function(p){return p.c&&(p.c.s||p.c.m||p.c.d)});
-  var others=t.g.filter(function(p){return specials.indexOf(p)<0});
+  $("#tSub").textContent=t.g.length+" guests · "+COURSE_NAME[c];
+  var sp=specialsFor(t,c);
+  var std=t.g.filter(function(p){return sp.indexOf(p)<0});
   var tiles=["s","m","d"].map(function(k){
     var n=specialsFor(t,k).length;
-    return '<button class="ctile" data-c="'+k+'" aria-pressed="'+(k===c)+'"><b>'+COURSE_NAME[k]+'</b><span>'+(t.g.length-n)+' standard</span><span class="'+(n?"r":"")+'">'+(n?n+" special":"no specials")+'</span></button>';
+    return '<button class="ctile" data-c="'+k+'" aria-pressed="'+(k===c)+'"><b>'+COURSE_NAME[k]+'</b><span class="'+(n?"r":"")+'">'+(n?n+" special":"all standard")+'</span></button>';
   }).join("");
-  var g=specials.map(function(p){
-    var cat=(p.q.s||p.q.m||p.q.d)[1];
-    var rows=["s","m","d"].map(function(k){
-      var v=p.c[k];
-      return '<div class="plate'+(k===c?" now":"")+'"><b>'+COURSE_NAME[k]+'</b><span'+(v==="NO DESSERT"?' class="x"':'')+'>'+(v?esc(v):"Standard: "+esc(DISH[k]))+'</span></div>';
-    }).join("");
-    return '<div class="gcard cat-'+cat+'"><div class="top"><span class="nm">'+esc(p.n)+'</span>'+p.r.map(function(r){return '<span class="req'+(r[1]?" med":"")+'">'+esc(r[0])+'</span>'}).join("")+'</div><div class="plates">'+rows+'</div></div>';
+  var g=sp.map(function(p){
+    var v=p.c[c],cat=p.q[c][1];
+    return '<div class="gcard cat-'+cat+'"><div class="top"><span class="nm">'+esc(p.n)+'</span>'+p.r.map(function(r){return '<span class="req'+(r[1]?" med":"")+'">'+esc(r[0])+'</span>'}).join("")+'</div><div class="eat2'+(v==="NO DESSERT"?" x":"")+'">'+esc(v)+'</div></div>';
   }).join("");
   tBody.innerHTML=
-    tableSVG(t,c,"big-rt",true)+
-    '<div class="ctiles">'+tiles+'</div>'+
-    (specials.length?'<div class="rest"><h4>Special plates · '+specials.length+'</h4></div>'+g:'<div class="rest"><h4>No special plates at this table</h4></div>')+
-    '<div class="rest"><h4>Standard on all three courses · '+others.length+'</h4><div class="names">'+others.map(function(p){return '<span class="nm-chip">'+esc(p.n)+'</span>'}).join("")+'</div></div>'+
-    '<p class="seat-note">Chairs show who needs a special plate, not fixed seats. Ask the guest\'s name before serving.</p>';
+    '<div class="ctiles" style="margin-top:0">'+tiles+'</div>'+
+    '<div class="dish-line"><div class="k">'+COURSE_NAME[c]+' · standard plate</div><div class="d">'+esc(DISH[c])+'</div>'+
+      '<div class="big-n"><b>'+std.length+' ×</b><span>standard</span>'+(sp.length?'<b style="color:var(--alert);margin-left:10px">'+sp.length+' ×</b><span>special</span>':'')+'</div></div>'+
+    (sp.length?'<div class="rest"><h4>Special plates · '+COURSE_NAME[c]+'</h4></div>'+g:'<div class="rest"><h4>No special plates at this table for the '+COURSE_NAME[c].toLowerCase()+'</h4></div>')+
+    '<div class="rest"><h4>Standard plate · '+std.length+' guests</h4><div class="names">'+std.map(function(p){return '<span class="nm-chip">'+esc(p.n)+'</span>'}).join("")+'</div></div>'+
+    '<p class="seat-note">Guests sit anywhere at the table. Ask the guest\'s name before serving a special plate.</p>';
   if(anim){tBody.classList.remove("swap");void tBody.offsetWidth;tBody.classList.add("swap")}
   [].forEach.call(tBody.querySelectorAll(".ctile"),function(b){b.addEventListener("click",function(){goCourse(b.getAttribute("data-c"))})});
 }

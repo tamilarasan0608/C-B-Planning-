@@ -159,15 +159,15 @@ footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);font-si
 .sheet.open .panel{transform:none}
 .sheet.closing .panel{transition-duration:280ms}
 @media (min-width:900px){.panel{left:50%;right:auto;width:900px;margin-left:-450px;top:32px;bottom:0}}
-.panel-head{flex:none;background:rgba(245,245,247,.92);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--hair);padding:8px 16px 12px;display:grid;gap:10px}
+.panel-head{flex:none;background:rgba(245,245,247,.92);-webkit-backdrop-filter:saturate(180%) blur(20px);backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid var(--hair);padding:6px 16px 10px;display:grid;gap:8px}
 .grabber{width:38px;height:5px;border-radius:3px;background:#c7c7cc;margin:0 auto 2px}
 .ph-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-.ph-row h2{font-size:22px;font-weight:700;line-height:1.15}
+.ph-row h2{font-size:20px;font-weight:700;line-height:1.15}
 .ph-row p{margin:2px 0 0;font-size:14px;color:var(--ink2)}
 .close{flex:none;width:32px;height:32px;border-radius:50%;border:0;background:var(--fill);display:grid;place-items:center;cursor:pointer;transition:transform 120ms var(--ease-out)}
 .close:active{transform:scale(.92)}
 .close:focus-visible{outline:2px solid var(--blue)}
-.panel-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:16px 16px calc(40px + env(safe-area-inset-bottom,0px))}
+.panel-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;padding:10px 12px calc(40px + env(safe-area-inset-bottom,0px))}
 .seg.course-seg{max-width:none}
 
 .dish-hero{background:var(--card);border-radius:var(--radius);padding:16px}
@@ -187,29 +187,40 @@ footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);font-si
 .alt .what{font-weight:600;line-height:1.3}
 .alt .who{grid-column:2;font-size:13px;color:var(--ink2)}
 
-/* Room map */
-.map-card{background:var(--card);border-radius:var(--radius);padding:14px;margin-top:12px}
-.map-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:8px}
-.map-head b{font-size:16px}
-.map-head span{font-size:13px;color:var(--ink2)}
-.map{position:relative;width:100%;aspect-ratio:4/5;background:
-  radial-gradient(circle at 1px 1px,#e3e3e8 1px,transparent 1.2px) 0 0/18px 18px,var(--card);border:1px solid var(--hair);border-radius:14px;overflow:hidden}
-@media (min-width:640px){.map{aspect-ratio:4/3}}
-.tbl{position:absolute;transform:translate(-50%,-50%);width:clamp(68px,19%,132px);height:clamp(50px,11.5%,76px);border-radius:50%;border:1.5px solid #c7c7cc;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;padding:0;line-height:1.05;box-shadow:0 1px 2px rgba(0,0,0,.06);transition:transform 220ms var(--ease-out),border-color 180ms ease,box-shadow 220ms var(--ease-out),background-color 180ms ease;-webkit-tap-highlight-color:transparent}
-.tbl.big{width:clamp(76px,22%,150px);height:clamp(56px,13%,84px)}
-.tbl.small{width:clamp(62px,17%,118px);height:clamp(46px,10.5%,66px)}
-.tbl .no{font-size:19px;font-weight:700;letter-spacing:-.02em}
-.tbl .sz{font-size:11px;color:var(--ink2);font-weight:500}
-.tbl .badge{position:absolute;top:-6px;right:-4px;min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:var(--alert);color:#fff;font-size:11.5px;font-weight:700;display:grid;place-items:center;box-shadow:0 0 0 2px #fff}
-.tbl .badge.pop{animation:pop 300ms var(--ease-out)}
-@keyframes pop{0%{transform:scale(.6)}60%{transform:scale(1.12)}100%{transform:scale(1)}}
-.tbl:hover{border-color:#a1a1a6}
-.tbl[aria-pressed="true"]{border-color:var(--blue);background:var(--blue-tint);box-shadow:0 0 0 4px rgba(0,113,227,.18);transform:translate(-50%,-50%) scale(1.06)}
-.tbl:focus-visible{outline:2px solid var(--blue);outline-offset:3px}
-.tv{position:absolute;left:51%;top:92%;transform:translate(-50%,-50%);width:44%;height:7%;min-height:28px;border:2px solid var(--ink);border-radius:6px;background:var(--ink);color:#fff;font-size:12px;font-weight:700;letter-spacing:.12em;display:grid;place-items:center}
-.map-legend{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px;font-size:13px;color:var(--ink2)}
-.map-legend span{display:inline-flex;align-items:center;gap:6px}
-.mini-badge{display:inline-grid;place-items:center;min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--alert);color:#fff;font-size:11px;font-weight:700}
+/* One-screen overview: tables in room position */
+.ov{background:var(--card);border-radius:var(--radius);padding:10px;touch-action:pan-y}
+.ov-top{display:flex;align-items:baseline;justify-content:space-between;gap:8px}
+.ov-top .dish{font-size:14px;font-weight:600;line-height:1.3;min-width:0}
+.ov-top .tot{font-size:12px;color:var(--ink2);white-space:nowrap;font-variant-numeric:tabular-nums}
+.ov-top .tot b{color:var(--alert)}
+.back-label{margin-top:6px;font-size:11px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.1em;text-align:center}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:4px}
+.cell{display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:3px;text-align:left;background:var(--bg);border:1.5px solid transparent;border-radius:12px;padding:6px;min-width:0;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform 120ms var(--ease-out),border-color 180ms ease}
+.cell:active{transform:scale(.97)}
+.cell:focus-visible{outline:2px solid var(--blue);outline-offset:1px}
+.cell.has{border-color:var(--alert-line);background:#fff8f7}
+.ch{display:flex;align-items:center;justify-content:space-between;gap:4px}
+.tno{width:25px;height:25px;border-radius:50%;background:var(--ink);color:#fff;font-size:15px;font-weight:700;display:grid;place-items:center;flex:none}
+.cell.has .tno{background:var(--alert)}
+.tpx{font-size:11px;color:var(--ink2);font-weight:500;text-align:right;line-height:1.15}
+.stdl{font-size:12px;color:var(--ink2);line-height:1.25}
+.stdl b{color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums}
+.ok{font-size:12px;color:var(--lunch);font-weight:600;line-height:1.25}
+.spl{border-left:3px solid var(--alert);background:#fff;border-radius:6px;padding:3px 6px;line-height:1.2;min-width:0}
+.spl b{display:block;font-size:12px;font-weight:700}
+.spl span{display:block;font-size:11px;color:var(--ink2);font-weight:500}
+.spl.halal{border-color:#0b7285} .spl.veg{border-color:#1f7a3a} .spl.fish{border-color:#0071e3} .spl.gf{border-color:#b26a00} .spl.med{border-color:var(--alert)} .spl.none{border-color:var(--ink);background:var(--ink)}
+.spl.none b,.spl.none span{color:#fff}
+.tvbar{margin-top:6px;height:22px;border-radius:7px;background:var(--ink);color:#fff;font-size:11px;font-weight:700;letter-spacing:.14em;display:grid;place-items:center}
+.keyrow{display:flex;flex-wrap:wrap;justify-content:center;gap:3px 10px;margin-top:7px;font-size:11px;color:var(--ink2)}
+.keyrow span{display:inline-flex;align-items:center;gap:4px}
+.keyrow i{width:3px;height:11px;border-radius:2px;display:inline-block}
+.swipe-hint{text-align:center;font-size:11px;color:var(--ink3);margin-top:6px}
+.slide-l{animation:slideL 280ms var(--ease-out) both}
+.slide-r{animation:slideR 280ms var(--ease-out) both}
+@keyframes slideL{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+@keyframes slideR{from{opacity:0;transform:translateX(-18px)}to{opacity:1;transform:none}}
+.block-title{font-size:17px;font-weight:700;margin:22px 2px 8px}
 
 /* Table cards */
 .tables{display:grid;gap:10px;margin-top:12px}
@@ -274,8 +285,8 @@ footer{margin-top:36px;padding-top:16px;border-top:1px solid var(--line);font-si
       <div class="grabber" aria-hidden="true"></div>
       <div class="ph-row">
         <div>
-          <h2 id="planTitle">Siemens dinner · Table plan</h2>
-          <p>Thursday 8 Oct · Avon Room, 1st floor · 20:00 · 74 guests on 9 tables</p>
+          <h2 id="planTitle">Siemens dinner · Avon</h2>
+          <p>Thu 8 Oct · 20:00 · 74 guests · swipe to change course, tap a table for names</p>
         </div>
         <button class="close" data-close aria-label="Close table plan">
           <svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M2 2l10 10M12 2L2 12" stroke="#1d1d1f" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
@@ -361,7 +372,6 @@ var E=[
 {d:"wed",t:"14:00",e:"14:15",r:"avon",rl:"Avon Room",pax:"40",p:[P("tc","Tea & Coffee")],ti:"Stone King LLP · Afternoon break",b:TC},
 {d:"wed",t:"15:30",e:"17:00",r:"terrace",rl:"Alfresco Terrace",pax:"45",p:[P("canape","Canapés"),P("drinks","Drinks")],ti:"Stone King LLP · Drinks reception and networking",
  b:'<div class="course">Canapés · £10 per person</div><ul><li>Thai crab cakes, chilli jam</li><li>Chicken satay</li><li>Strathdon blue and leek tart (v)</li></ul><div class="course">Drinks</div><ul><li>1 bucket of lager (5 Peroni, 5 Corona)</li><li>3 bottles house white</li><li>Soft drinks in a bucket, for 10 people</li><li>1 jug of elderflower</li></ul><div class="note"><b>Set-up:</b> block off either end of the terrace for the group.</div>'},
-{d:"wed",t:"Night",r:"vellore",rl:"The Vellore",wn:"breakfast Thursday",pax:"1",pl:"room",k:"quiet",p:[P("plain","Bedroom")],ti:"WASSH · Overnight",b:"1 classic single, bed and breakfast."},
 
 /* THU */
 {d:"thu",t:"08:30",e:"09:00",r:"admiralty",rl:"Admiralty Antechamber",pax:"40",p:[P("tc","Tea & Coffee")],ti:"WASSH · Arrival",b:TC+'<div class="note"><b>All day:</b> different milks and decaf coffee available.</div>'},
@@ -394,7 +404,6 @@ var E=[
 {d:"thu",t:"19:15",e:"20:00",r:"avon",rl:"Avon Room",wn:"while guests are in the Colonnade",pax:"–",pl:"reset",k:"setup",p:[P("setup","Room reset")],ti:"Avon: team building to banquet for 74",b:"Fully laid by 20:00 to the table plan (9 tables, TV at the front). Hotel dresses the tables with candles."},
 {d:"thu",t:"20:00",e:"22:30",r:"avon",rl:"Avon Room",pax:"74",pl:"on plan",p:[P("dinner","Dinner")],ti:"Siemens · Banquet dinner",plan:true,
  b:SIEMENS_MENU+'<div class="diet"><div class="h">Special diets on the table plan · 10 guests</div><ul><li><b>4 × halal</b> (1 also pescetarian, 1 also vegetarian)</li><li>2 × vegetarian</li><li>1 × gluten free / coeliac</li><li>1 × no raw meat, raw eggs or pâté</li><li>1 × no fish or egg, <b>no dessert</b></li><li>1 × lactose and sulphite intolerant</li></ul></div><div class="course">Drinks on tables</div><ul><li>18 bottles house red and white</li><li>18 waters</li><li>9 buckets of lager (5 Peroni, 5 Corona)</li></ul>'},
-{d:"thu",t:"Night",r:"vellore",rl:"The Vellore",wn:"breakfast Friday",pax:"88",pl:"rooms",k:"quiet",p:[P("plain","Bedrooms")],ti:"Siemens and WASSH · Overnight",b:"Siemens 78 rooms (15 are contractors who pay their own B&amp;B at checkout) · WASSH 10 rooms."},
 
 /* FRI */
 {d:"fri",t:"08:00",e:"10:00",r:"avon",rl:"Avon Room",pax:"–",pl:"set-up",k:"quiet",p:[P("plain","Set-up")],ti:"Siemens · ACF set up the quiz",b:"ACF arrive between 08:30 and 09:00."},
@@ -422,40 +431,44 @@ var E=[
 {d:"fri",t:"22:00",e:"23:15",r:"avon",rl:"Avon Room",pax:"90",k:"quiet",p:[P("plain","Auction")],ti:"Rugby for Heroes · Auction, charity and Q&amp;A",
  b:'<ul><li><b>22:00</b> auction and charity</li><li><b>22:30</b> Q&amp;A with Mike and Lewis</li><li><b>23:15</b> finish</li></ul><div class="note">Clear desserts and serve coffee before 22:00.</div>'},
 {d:"fri",t:"23:15",e:"2am+",r:"colonnade",rl:"Colonnade Bar",pax:"90",pl:"max",p:[P("bar","Bar")],ti:"Rugby for Heroes · Main bar after the event",b:'<b>Keep a member of staff on duty (nights) so guests can drink until 2am or later.</b> Guests pay their own.'},
-{d:"fri",t:"Night",r:"vellore",rl:"The Vellore",wn:"breakfast Saturday",pax:"8",pl:"rooms",k:"quiet",p:[P("plain","Bedrooms")],ti:"Rugby for Heroes · Overnight",b:"8 classic singles, bed and breakfast. Extras go on the bedrooms."}
 ];
 
 /* ---------------- Siemens table plan ---------------- */
 var DISH={s:"Ham hock terrine, Granny Smith purée, pork crackling, piccalilli",m:"Roasted lemon chicken, mushroom mix, bacon and mash",d:"Buttermilk panna cotta, berry compote, honeycomb"};
 var COURSE_NAME={s:"Starter",m:"Main",d:"Dessert"};
 /* Each special guest: name, requirement tags [label, medical?], and what they get per course (null = standard dish). */
+function G(n,r,c,q){return {n:n,r:r,c:c,q:q}}
 var HALAL={s:"Halal starter, no pork",m:"Halal chicken, no bacon",d:"Gelatine-free dessert"};
+var HALAL_Q={s:["Halal, no pork","halal"],m:["Halal, no bacon","halal"],d:["Gelatine-free","halal"]};
 var VEG={s:"Vegetarian starter",m:"Vegetarian main",d:"Gelatine-free dessert"};
+var VEG_Q={s:["Vegetarian","veg"],m:["Vegetarian","veg"],d:["Gelatine-free","veg"]};
+/* Grid position: row 1 is the back of the room (8, 7, 9), row 3 is nearest the TV (2, 3, 1). */
 var TABLES=[
- {no:1,x:84.2,y:72.6,sz:"",g:["Chris N.","Chris W.","Heather D.","Jacob J.","Jay D.","Martin L.","Matthew O.","Pom P.","Tayo L."]},
- {no:2,x:14.9,y:72.8,sz:"",g:["Andrew L.","Cameron S.","Charlie M.","Dav U.","Eric D.","Richard E.","Rory M.","Russell G.","Tiaan K."]},
- {no:3,x:48.4,y:56,sz:"big",g:[{n:"Abdul R.",r:[["Halal"]],c:HALAL},"Berenice E.","Chris W.",
-   {n:"Helen H.",r:[["No raw meat, raw egg or pâté",1]],c:{s:"Alternative starter, no terrine or pâté",m:null,d:null}},
-   "Latoya C.","Lee P.","Raman R.",{n:"Rizwan H.",r:[["Halal"]],c:HALAL}]},
- {no:4,x:15.4,y:45.7,sz:"",g:["Alex H.","Chris P.","Jack R.","Joel J.","Matt A.","Satvinder B.","Simon A.","Victoria B."]},
- {no:5,x:48.2,y:38.7,sz:"",g:["Ben A.",{n:"Bhavin P.",r:[["Vegetarian"]],c:VEG},"Craig B.","Fiona H.","Jake A.","Neil V.","Damian B.","Richard E."]},
- {no:6,x:80.7,y:39.6,sz:"",g:["Alan H.","Ben S.","Callum J.","Daryl W.","James C.","Matthew D.",
-   {n:"Simon C.",r:[["Gluten free / coeliac",1]],c:{s:"Gluten-free starter (check piccalilli and crackling)",m:"Gluten-free main (check sauce)",d:"Gluten-free dessert (check honeycomb)"}},
-   {n:"Katherine W.",r:[["Vegetarian"]],c:VEG}]},
- {no:7,x:47.4,y:23,sz:"small",g:["Chris R.","George C.","Jait P.","John I.","Jonathon D.","Ryan T.","Sanjeev J.",
-   {n:"Tahirah H.",r:[["Halal"],["Pescetarian"]],c:{s:"Fish or vegetarian starter, no pork",m:"Fish or vegetarian main",d:"Gelatine-free dessert"}}]},
- {no:8,x:21.4,y:9,sz:"",g:["Arjun K.","Chris M.","George H.",{n:"Hasib A.",r:[["Halal"],["Vegetarian"]],c:VEG},"Hassan H.","John B.","Mike B.","Peter R."]},
- {no:9,x:80.2,y:8.6,sz:"",g:["Jack W.","Ryan G.",
-   {n:"Steve B.",r:[["No fish or egg",1],["No dessert",1]],c:{s:"Standard starter, confirm no egg",m:"Standard main, confirm no egg",d:"NO DESSERT"}},
+ {no:8,g:["Arjun K.","Chris M.","George H.",G("Hasib A.",[["Halal"],["Vegetarian"]],VEG,{s:["Veg (halal)","veg"],m:["Veg (halal)","veg"],d:["Gelatine-free","veg"]}),"Hassan H.","John B.","Mike B.","Peter R."]},
+ {no:7,g:["Chris R.","George C.","Jait P.","John I.","Jonathon D.","Ryan T.","Sanjeev J.",
+   G("Tahirah H.",[["Halal"],["Pescetarian"]],{s:"Fish or vegetarian starter, no pork",m:"Fish or vegetarian main",d:"Gelatine-free dessert"},{s:["Fish/veg, halal","fish"],m:["Fish/veg, halal","fish"],d:["Gelatine-free","fish"]})]},
+ {no:9,g:["Jack W.","Ryan G.",
+   G("Steve B.",[["No fish or egg",1],["No dessert",1]],{s:"Standard starter, confirm no egg",m:"Standard main, confirm no egg",d:"NO DESSERT"},{s:["Std, no egg","med"],m:["Std, no egg","med"],d:["NO DESSERT","none"]}),
    "Steve R.",
-   {n:"Tamara H.",r:[["Lactose and sulphite intolerant",1]],c:{s:"No piccalilli or vinegar, check cure for sulphites",m:"Lactose-free mash, no wine or vinegar in the sauce",d:"Dairy-free dessert"}},
-   "Thomas D.","Tom R.","Tom H."]}
+   G("Tamara H.",[["Lactose and sulphite intolerant",1]],{s:"No piccalilli or vinegar, check cure for sulphites",m:"Lactose-free mash, no wine or vinegar in the sauce",d:"Dairy-free dessert"},{s:["No vinegar","med"],m:["No dairy/wine","med"],d:["Dairy-free","med"]}),
+   "Thomas D.","Tom R.","Tom H."]},
+ {no:4,g:["Alex H.","Chris P.","Jack R.","Joel J.","Matt A.","Satvinder B.","Simon A.","Victoria B."]},
+ {no:5,g:["Ben A.",G("Bhavin P.",[["Vegetarian"]],VEG,VEG_Q),"Craig B.","Fiona H.","Jake A.","Neil V.","Damian B.","Richard E."]},
+ {no:6,g:["Alan H.","Ben S.","Callum J.","Daryl W.","James C.","Matthew D.",
+   G("Simon C.",[["Gluten free / coeliac",1]],{s:"Gluten-free starter (check piccalilli and crackling)",m:"Gluten-free main (check sauce)",d:"Gluten-free dessert (check honeycomb)"},{s:["Gluten free","gf"],m:["Gluten free","gf"],d:["Gluten free","gf"]}),
+   G("Katherine W.",[["Vegetarian"]],VEG,VEG_Q)]},
+ {no:2,g:["Andrew L.","Cameron S.","Charlie M.","Dav U.","Eric D.","Richard E.","Rory M.","Russell G.","Tiaan K."]},
+ {no:3,g:[G("Abdul R.",[["Halal"]],HALAL,HALAL_Q),"Berenice E.","Chris W.",
+   G("Helen H.",[["No raw meat, raw egg or pâté",1]],{s:"Alternative starter, no terrine or pâté",m:null,d:null},{s:["No terrine/pâté","med"],m:null,d:null}),
+   "Latoya C.","Lee P.","Raman R.",G("Rizwan H.",[["Halal"]],HALAL,HALAL_Q)]},
+ {no:1,g:["Chris N.","Chris W.","Heather D.","Jacob J.","Jay D.","Martin L.","Matthew O.","Pom P.","Tayo L."]}
 ];
+var DETAIL_ORDER=[1,2,3,4,5,6,7,8,9];
 TABLES.forEach(function(t){t.g=t.g.map(function(x){return typeof x==="string"?{n:x}:x})});
 /* Map order front to back matches the room: tables 8 and 9 at the back, TV at the front. */
 
 /* ---------------- State ---------------- */
-var state={day:"thu",room:"all",course:"s",table:null};
+var state={day:"thu",room:"all",course:"s"};
 var DAY_KEYS=["wed","thu","fri"],DATES={"2026-10-07":"wed","2026-10-08":"thu","2026-10-09":"fri"};
 var todayKey=null;
 try{todayKey=DATES[new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/London"}).format(new Date())]||null}catch(e){}
@@ -501,7 +514,7 @@ function renderRooms(){
 function card(x,i){
   var fl=FLOOR[x.r]||["fx",""];
   var pills=x.p.map(function(p){return '<span class="pill '+p[0]+'">'+esc(p[1])+'</span>'}).join("");
-  var plan=x.plan?'<button class="cta" data-open-plan><span>Open table plan<small>9 tables · each guest by course · allergies</small></span><svg width="9" height="15" viewBox="0 0 9 15" aria-hidden="true"><path d="M1.5 1.5l6 6-6 6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>':"";
+  var plan=x.plan?'<button class="cta" data-open-plan><span>Open table plan<small>One screen per course · every table · allergies</small></span><svg width="9" height="15" viewBox="0 0 9 15" aria-hidden="true"><path d="M1.5 1.5l6 6-6 6" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></button>':"";
   return '<article class="ev '+(x.k||"")+'" style="animation-delay:'+Math.min(i*35,320)+'ms">'+
     '<div class="time"><b>'+x.t+'</b>'+(x.e?'<span>to '+x.e+'</span>':"")+'</div>'+
     '<div class="pax"><b>'+x.pax+'</b><span>'+(x.pl||"guests")+'</span></div>'+
@@ -539,11 +552,13 @@ function renderAll(animate){
 
 /* ---------------- Table plan ---------------- */
 var sheet=$("#sheet"),planBody=$("#planBody"),lastFocus=null;
-var markCourse=setupSeg($("#courseSeg"),"data-course",function(v){state.course=v;renderPlan(true)});
+var markCourse=setupSeg($("#courseSeg"),"data-course",function(v){goCourse(v)});
 
 function specialsFor(t,c){return t.g.filter(function(p){return p.c&&p.c[c]})}
 
-function renderPlan(swap){
+function byNo(n){return TABLES.filter(function(t){return t.no===n})[0]}
+var COURSES=["s","m","d"];
+function renderPlan(dir){
   var c=state.course;
   markCourse(c);
   var total=0,alts={},altCount=0;
@@ -555,15 +570,19 @@ function renderPlan(swap){
     });
   });
   var std=total-altCount;
-  var altHtml=Object.keys(alts).map(function(k){return '<div class="alt"><span class="num">'+alts[k].length+'×</span><span class="what">'+esc(k)+'</span><span class="who">'+esc(alts[k].join(" · "))+'</span></div>'}).join("");
+  var anim=dir===1?" slide-l":dir===-1?" slide-r":"";
 
-  var mapHtml=TABLES.map(function(t){
-    var n=specialsFor(t,c).length;
-    return '<button class="tbl '+t.sz+'" data-t="'+t.no+'" aria-pressed="'+(state.table===t.no)+'" style="left:'+t.x+'%;top:'+t.y+'%" aria-label="Table '+t.no+', '+t.g.length+' guests, '+n+' special">'+
-      '<span class="no">'+t.no+'</span><span class="sz">'+t.g.length+' guests</span>'+(n?'<span class="badge'+(swap?" pop":"")+'">'+n+'</span>':"")+'</button>';
+  var cells=TABLES.map(function(t){
+    var sp=specialsFor(t,c),stdN=t.g.length-sp.length;
+    var body=sp.length
+      ?'<div class="stdl"><b>'+stdN+'</b> standard</div>'+sp.map(function(p){return '<div class="spl '+p.q[c][1]+'"><b>'+esc(p.n)+'</b><span>'+esc(p.q[c][0])+'</span></div>'}).join("")
+      :'<div class="ok">All '+stdN+' standard</div>';
+    return '<button class="cell'+(sp.length?" has":"")+'" data-t="'+t.no+'" aria-label="Table '+t.no+', '+t.g.length+' guests, '+sp.length+' special. Show names."><div class="ch"><span class="tno">'+t.no+'</span><span class="tpx">'+t.g.length+' guests</span></div>'+body+'</button>';
   }).join("");
 
-  var tablesHtml=TABLES.map(function(t){
+  var altHtml=Object.keys(alts).map(function(k){return '<div class="alt"><span class="num">'+alts[k].length+'×</span><span class="what">'+esc(k)+'</span><span class="who">'+esc(alts[k].join(" · "))+'</span></div>'}).join("");
+
+  var tablesHtml=DETAIL_ORDER.map(byNo).map(function(t){
     var sp=specialsFor(t,c),stdN=t.g.length-sp.length;
     var spHtml=sp.map(function(p){
       return '<div class="sp"><div class="top"><span class="nm">'+esc(p.n)+'</span>'+p.r.map(function(r){return '<span class="req'+(r[1]?" med":"")+'">'+esc(r[0])+'</span>'}).join("")+'</div><div class="eat">'+esc(p.c[c])+'</div></div>';
@@ -575,33 +594,57 @@ function renderPlan(swap){
   }).join("");
 
   planBody.innerHTML=
-    '<div class="dish-hero'+(swap?" fade-swap":"")+'"><div class="k">'+COURSE_NAME[c]+' · standard dish</div><div class="d">'+esc(DISH[c])+'</div>'+
-      '<div class="counts"><div class="count"><div class="v">'+total+'</div><div class="k">Covers</div></div><div class="count"><div class="v">'+std+'</div><div class="k">Standard</div></div><div class="count warn"><div class="v">'+altCount+'</div><div class="k">Special</div></div></div>'+
+    '<div class="ov'+anim+'" id="overview">'+
+      '<div class="ov-top"><span class="dish">'+esc(DISH[c])+'</span><span class="tot">'+std+' std · <b>'+altCount+' special</b></span></div>'+
+      '<div class="back-label">Back of room</div>'+
+      '<div class="grid">'+cells+'</div>'+
+      '<div class="tvbar">TV · FRONT</div>'+
+      '<div class="keyrow"><span><i style="background:#0b7285"></i>Halal</span><span><i style="background:#1f7a3a"></i>Vegetarian</span><span><i style="background:#0071e3"></i>Pescetarian</span><span><i style="background:#b26a00"></i>Gluten free</span><span><i style="background:#c4281c"></i>Intolerance</span></div>'+
+    '</div>'+
+    '<h3 class="block-title">Kitchen summary · '+COURSE_NAME[c]+'</h3>'+
+    '<div class="dish-hero"><div class="counts"><div class="count"><div class="v">'+total+'</div><div class="k">Covers</div></div><div class="count"><div class="v">'+std+'</div><div class="k">Standard</div></div><div class="count warn"><div class="v">'+altCount+'</div><div class="k">Special</div></div></div>'+
       '<div class="alts">'+altHtml+'</div></div>'+
-    '<div class="map-card"><div class="map-head"><b>Avon Room layout</b><span>Tap a table</span></div><div class="map">'+mapHtml+'<div class="tv">TV</div></div>'+
-      '<div class="map-legend"><span><span class="mini-badge">2</span> guests who need a different '+COURSE_NAME[c].toLowerCase()+'</span></div></div>'+
-    '<div class="tables'+(swap?" fade-swap":"")+'">'+tablesHtml+'</div>'+
+    '<h3 class="block-title">Table by table · '+COURSE_NAME[c]+'</h3>'+
+    '<div class="tables">'+tablesHtml+'</div>'+
     '<p class="plan-note">Special plates show what each guest needs. Chef decides the exact dish. Booking is for 78; this plan has 74 names.</p>';
 
-  [].forEach.call(planBody.querySelectorAll(".tbl"),function(b){
+  [].forEach.call(planBody.querySelectorAll(".cell"),function(b){
     b.addEventListener("click",function(){
-      var no=+b.getAttribute("data-t");
-      state.table=state.table===no?null:no;
-      [].forEach.call(planBody.querySelectorAll(".tbl"),function(o){o.setAttribute("aria-pressed",String(+o.getAttribute("data-t")===state.table))});
-      if(state.table){
-        var tc=$("#tcard-"+no,planBody);
-        var top=tc.getBoundingClientRect().top-planBody.getBoundingClientRect().top+planBody.scrollTop-12;
-        planBody.scrollTo({top:top,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
-        tc.classList.remove("flash");void tc.offsetWidth;tc.classList.add("flash");
-        setTimeout(function(){tc.classList.remove("flash")},1400);
-      }
+      var tc=$("#tcard-"+b.getAttribute("data-t"),planBody);
+      var top=tc.getBoundingClientRect().top-planBody.getBoundingClientRect().top+planBody.scrollTop-12;
+      planBody.scrollTo({top:top,behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
+      tc.classList.remove("flash");void tc.offsetWidth;tc.classList.add("flash");
+      setTimeout(function(){tc.classList.remove("flash")},1400);
     });
   });
 }
+function goCourse(c,dir){
+  if(c===state.course)return;
+  if(dir===undefined)dir=COURSES.indexOf(c)>COURSES.indexOf(state.course)?1:-1;
+  state.course=c;
+  var keep=planBody.scrollTop;
+  renderPlan(dir);
+  planBody.scrollTop=keep;
+}
+(function(){
+  var x0=null,y0=null;
+  planBody.addEventListener("touchstart",function(e){
+    if(!e.target.closest||!e.target.closest("#overview")){x0=null;return}
+    x0=e.touches[0].clientX;y0=e.touches[0].clientY;
+  },{passive:true});
+  planBody.addEventListener("touchend",function(e){
+    if(x0===null)return;
+    var dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;x0=null;
+    if(Math.abs(dx)<50||Math.abs(dx)<Math.abs(dy)*1.5)return;
+    var i=COURSES.indexOf(state.course)+(dx<0?1:-1);
+    if(i<0||i>2)return;
+    goCourse(COURSES[i],dx<0?1:-1);
+  },{passive:true});
+})();
 
 function openPlan(from){
   lastFocus=from||document.activeElement;
-  state.table=null;renderPlan(false);
+  renderPlan(0);
   planBody.scrollTop=0;
   sheet.classList.remove("closing");
   sheet.setAttribute("aria-hidden","false");
